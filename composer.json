@@ -1,0 +1,53 @@
+{
+  "name": "collectreviewswp/collect-reviews",
+  "description": "The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Trustpilot.",
+  "type": "wordpress-plugin",
+  "homepage": "https://wordpress.org/plugins/collect-reviews/",
+  "license": "GPL-3.0-or-later",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "require": {
+    "php": ">=7.2",
+    "league/container": "^4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "CollectReviews\\": "src",
+      "CollectReviews\\Vendor\\": "libs/packages"
+    },
+    "classmap": ["libs/classes"]
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
+    "roave/security-advisories": "dev-master",
+    "wp-coding-standards/wpcs": "^2.3"
+  },
+  "scripts": {
+    "pre-autoload-dump": [
+      "mkdir -p ./libs/packages",
+      "mkdir -p ./libs/classes"
+    ],
+    "post-autoload-dump": [
+      "rmdir ./libs/packages 2>/dev/null || true",
+      "rmdir ./libs/classes 2>/dev/null || true"
+    ]
+  },
+  "extra": {
+    "phpcodesniffer-search-depth": 1,
+    "mozart": {
+      "dep_namespace": "CollectReviews\\Vendor\\",
+      "dep_directory": "/libs/packages/",
+      "classmap_directory": "/libs/classes/",
+      "classmap_prefix": "CollectReviewsVendor_",
+      "delete_vendor_directories": true
+    }
+  }
+}

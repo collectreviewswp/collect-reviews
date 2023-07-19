@@ -1,0 +1,141 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #eee;
+	font-size: 18px;
+	line-height: 1.4;
+}
+
+#collect-reviews .collect-reviews-button {
+	position: relative;
+	display: inline-block;
+	padding: 8px 16px;
+	font-size: 16px;
+	font-weight: 700;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	background-color: #1565c0;
+	transition: 0.2s;
+	text-decoration: none !important;
+}
+
+#collect-reviews .collect-reviews-button:hover {
+	background-color: #0e4686;
+}
+
+#collect-reviews .collect-reviews-button--loading {
+	color: transparent !important;
+	pointer-events: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#collect-reviews .collect-reviews-button--loading:after {
+	content: "";
+	box-sizing: border-box;
+	animation: collect-reviews-btn-spin 500ms infinite linear;
+	border: 2px solid #fff;
+	border-radius: 32px;
+	border-right-color: transparent !important;
+	border-top-color: transparent !important;
+	display: block;
+	height: 16px;
+	top: 50%;
+	margin-top: -8px;
+	left: 50%;
+	margin-left: -8px;
+	position: absolute;
+	width: 16px;
+}
+
+#collect-reviews .collect-reviews-field {
+	margin-bottom: 16px;
+}
+
+#collect-reviews .collect-reviews-field__label {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+#collect-reviews .collect-reviews-field__input {
+	display: block;
+	width: 100%;
+	padding: 8px;
+	font-size: 16px;
+	border-radius: 3px;
+	border: 1px solid rgba(0, 0, 0, 0.23);
+	resize: none;
+}
+
+#collect-reviews .collect-reviews-field__input:focus {
+	border-color: #1565c0;
+	outline: 1px solid #1565c0;
+}
+
+#collect-reviews.collect-reviews-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	padding: 48px 16px 32px;
+}
+
+#collect-reviews .collect-reviews-page__logo {
+	margin-bottom: 24px;
+	max-width: 300px;
+	max-height: 100px;
+}
+
+#collect-reviews .collect-reviews-page__logo img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+#collect-reviews .collect-reviews-review {
+	max-width: 370px;
+	width: 100%;
+	padding: 16px;
+	background-color: #fff;
+	border-radius: 3px;
+}
+
+#collect-reviews .collect-reviews-review__text {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+#collect-reviews .collect-reviews-feedback {
+	max-width: 600px;
+	width: 100%;
+	padding: 16px;
+	background-color: #fff;
+	border-radius: 3px;
+}
+
+#collect-reviews .collect-reviews-feedback__text {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+@keyframes collect-reviews-btn-spin {
+	0% {
+		transform: rotate(0deg)
+	}
+
+	100% {
+		transform: rotate(360deg)
+	}
+}

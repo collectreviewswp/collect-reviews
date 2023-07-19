@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<ruleset name="Collect Reviews Plugin">
+    <description>The coding standards for Collect Reviews plugin.</description>
+
+    <!-- What to scan -->
+    <file>.</file>
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+    <exclude-pattern>react-app/*</exclude-pattern>
+    <exclude-pattern>react-emails/*</exclude-pattern>
+
+    <!-- Rules: Check PHP version compatibility -->
+    <config name="testVersion" value="7.2-"/>
+
+    <!-- Rules: WordPress Coding Standards -->
+    <config name="minimum_supported_wp_version" value="5.2"/>
+    <config name="multi_domains" value="true"/>
+    <rule ref="WordPress">
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+
+        <!-- Allow less strict indenting and spacing. -->
+        <exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"/>
+        <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"/>
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed"/>
+        <exclude name="Generic.Functions.FunctionCallArgumentSpacing"/>
+        <exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found"/>
+        <!-- Don't make comment formatting quite as strict. -->
+        <exclude name="Squiz.Commenting.InlineComment.SpacingAfter"/>
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        <exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+        <exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"/>
+        <exclude name="Squiz.Commenting.FileComment.WrongStyle"/>
+        <!-- Less strict enqueueing rules. -->
+        <exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"/>
+        <exclude name="WordPress.WP.EnqueuedResourceParameters.NotInFooter"/>
+        <exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"/>
+        <!-- Database specific rules. -->
+        <exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery"/>
+        <!-- PSR4. -->
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+        <!-- Misc. -->
+        <exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
+        <exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+    </rule>
+
+    <!-- Re-enable certain sniffs that were disabled by WordPress* standards. -->
+    <rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital">
+        <severity>5</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
+        <severity>5</severity>
+    </rule>
+    <rule ref="Generic.Commenting.DocComment.NonParamGroup">
+        <severity>5</severity>
+    </rule>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <properties>
+            <property name="complexity" value="6"/>
+            <property name="absoluteComplexity" value="10"/>
+        </properties>
+    </rule>
+
+    <rule ref="Generic.Metrics.NestingLevel">
+        <properties>
+            <property name="absoluteNestingLevel" value="3"/>
+        </properties>
+    </rule>
+</ruleset>

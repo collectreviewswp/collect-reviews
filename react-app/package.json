@@ -1,0 +1,66 @@
+{
+  "name": "collect-reviews-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/cache": "^11.10.7",
+    "@emotion/memoize": "^0.8.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@loadable/component": "^5.15.3",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/lab": "^5.0.0-alpha.124",
+    "@mui/material": "^5.11.10",
+    "@mui/x-data-grid": "^6.3.0",
+    "@mui/x-date-pickers": "^6.6.0",
+    "@react-email/preview": "^0.0.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@tinymce/tinymce-react": "^4.3.0",
+    "@wordpress/i18n": "^4.32.0",
+    "axios": "^1.4.0",
+    "clsx": "^1.2.1",
+    "dayjs": "^1.11.7",
+    "formik": "^2.2.9",
+    "formik-mui": "^5.0.0-alpha.0",
+    "formik-mui-x-date-pickers": "^0.0.1",
+    "raw-loader": "^4.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "5.0.1",
+    "react-scroll": "^1.8.9",
+    "sass": "^1.58.3",
+    "source-map-explorer": "^2.5.3",
+    "tinymce": "^6.4.1",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.0.2"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "analyze": "source-map-explorer '../assets/app/static/js/*.js'"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0"
+  }
+}

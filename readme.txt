@@ -1,0 +1,73 @@
+=== Collect Reviews ===
+Contributors: collectreviewswp
+Tags: customer reviews, reviews collection, google reviews, trustpilot reviews, woocommerce, wpforms, easy digital downloads
+Requires at least: 5.3
+Tested up to: 6.2
+Stable tag: 1.0.0
+Requires PHP: 7.2
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Trustpilot.
+
+== Description ==
+
+Collect Reviews is a powerful WordPress plugin designed to streamline the process of collecting reviews on various platforms like Google or Trustpilot to grow your business. Whether you're running an online store, a service-based business, or a content-driven website, the Collect Reviews plugin allows you automatically collect reviews from your customers. E.g. after purchase in your store or some form submission.
+
+### Collect reviews automatically
+
+Currently, the plugin supports integrations with WooCommerce, Easy Digital Downloads, and WPForms plugins to collect reviews automatically.
+
+#### How it works
+
+* **Review Request Email**: After the purchase or form submission the plugin sends a review request email to the customer.
+
+* **Rating Selection**: The review request email contains a stars widget, allowing the customer to select a rating from 1 to 5, indicating their level of satisfaction or experience.
+
+* **Redirect for Positive Ratings**: If the customer chooses a positive rating (e.g., 4 or 5 stars), they are redirected to your website, where you suggest leaving a review on a specific platform, such as Google. This intermediate step ensures transparency by informing the customer about the redirection to an external platform instead of directly redirecting them from the email.
+
+* **Private Feedback for Negative Ratings**: If the customer chooses a negative rating, they are not informed about the option to leave a review on Google or any other platform. Instead, they are redirected to a review form on the website, enabling them to provide feedback privately to the website owner. This helps the website owner address any concerns or issues raised by the customer directly, preventing negative reviews from appearing on public review platforms.
+
+In summary, the plugin sends review request emails, customers rate their experience, positive ratings are directed to leave reviews on external platforms, negative ratings provide private feedback.
+
+### Collect reviews manually
+
+You can always send review requests manually to any email addresses form the plugin interface.
+
+### Development
+
+Plugin source code is available on GitHub: https://github.com/collectreviewswp/collect-reviews
+
+== Frequently Asked Questions ==
+
+= Can I delay review request email sending =
+
+Yes, in the plugin settings you can set delay up to 12 month.
+
+= Can I change review request email content =
+
+Yes, review request email content fully customizable in the plugin settings.
+
+= How to collect reviews with WooCommerce =
+
+You can set up integration with WooCommerce to send review request emails after the purchase in your store.
+
+= How to collect reviews with Easy Digital Downloads =
+
+You can set up integration with Easy Digital Downloads to send review request emails after the purchase in your store.
+
+= How to collect reviews with WPForms =
+
+You can set up integration with WPForms to send review request emails after the form submission (e.g. payment or feedback form).
+
+== Screenshots ==
+
+1. Collect Reviews Settings page
+2. Integration configuration settings page
+3. Review Requests Logs page
+4. Review Request Email
+
+== Changelog ==
+
+= 1.0.0 =
+* Initial release.
