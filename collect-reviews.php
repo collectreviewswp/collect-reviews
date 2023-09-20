@@ -4,9 +4,8 @@
  * Version: 1.0.0
  * Requires at least: 5.3
  * Requires PHP: 7.2
- * Plugin URI: https://collectreviewswp.com/
  * Description: The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Trustpilot.
- * Author: Collect Reviews
+ * Author: Collect Reviews WP
  * Author URI: https://collectreviewswp.com/
  * Network: false
  * Text Domain: collect-reviews
