@@ -138,23 +138,31 @@ if ( version_compare( get_bloginfo( 'version' ), COLLECT_REVIEWS_WP_VER, '<' ) )
 	return;
 }
 
+// Prevent double loading of the same plugin.
+if ( class_exists( 'CollectReviews\Core' ) ) {
+	return;
+}
+
 require_once 'vendor/autoload.php';
 
-/**
- * Global function-holder. Works similar to a singleton's instance().
- *
- * @since 1.0.0
- *
- * @return \CollectReviews\Core
- */
-function collect_reviews() {
-	static $core;
+if ( ! function_exists( 'collect_reviews' ) ) {
+	/**
+	 * Global function-holder. Works similar to a singleton's instance().
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return \CollectReviews\Core
+	 */
+	function collect_reviews() {
 
-	if ( ! isset( $core ) ) {
-		$core = new \CollectReviews\Core();
+		static $core;
+
+		if ( ! isset( $core ) ) {
+			$core = new \CollectReviews\Core();
+		}
+
+		return $core;
 	}
-
-	return $core;
 }
 
 // Run the universe!
