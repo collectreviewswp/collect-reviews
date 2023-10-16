@@ -25,6 +25,16 @@ class Integration extends AbstractIntegration implements EcommerceIntegrationInt
 	}
 
 	/**
+	 * Register hooks.
+	 *
+	 * @since 1.0.0
+	 */
+	public function hooks() {
+
+		add_action( 'woocommerce_order_status_changed', [ $this->handler, 'order_status_changed' ], 10, 4 );
+	}
+
+	/**
 	 * Get the slug of the integration.
 	 *
 	 * @since 1.0.0

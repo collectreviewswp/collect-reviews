@@ -4,7 +4,6 @@ namespace CollectReviews\Integrations\WPForms;
 
 use CollectReviews\Helpers\Collection;
 use CollectReviews\Integrations\AbstractHandler;
-use CollectReviews\ModuleInterface;
 use CollectReviews\ReviewRequests\ReviewRequestsLimiter;
 
 /**
@@ -12,17 +11,7 @@ use CollectReviews\ReviewRequests\ReviewRequestsLimiter;
  *
  * @since 1.0.0
  */
-class Handler extends AbstractHandler implements ModuleInterface {
-
-	/**
-	 * Register hooks.
-	 *
-	 * @since 1.0.0
-	 */
-	public function hooks() {
-
-		add_action( 'wpforms_process_complete', [ $this, 'form_submitted' ], 10, 4 );
-	}
+class Handler extends AbstractHandler {
 
 	/**
 	 * Handle form submission. Create review request if form submission matches any trigger.
@@ -36,6 +25,10 @@ class Handler extends AbstractHandler implements ModuleInterface {
 	 */
 	public function form_submitted( $fields, $entry, $form_data, $entry_id ) {
 
+		if ( ! $this->integration->is_enabled() || ! $this->integration->is_configured() ) {
+			return;
+		}
+
 		$form_id = isset( $entry['id'] ) ? intval( $entry['id'] ) : false;
 
 		if ( empty( $form_id ) ) {
@@ -43,10 +36,6 @@ class Handler extends AbstractHandler implements ModuleInterface {
 		}
 
 		$options = $this->integration->get_options();
-
-		if ( empty( $options['enabled'] ) || empty( $options['triggers'] ) ) {
-			return;
-		}
 
 		// Skip early if any trigger doesn't have current form.
 		$trigger_form_ids = array_column( array_column( $options['triggers'], 'form' ), 'id' );

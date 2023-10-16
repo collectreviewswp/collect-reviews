@@ -2,6 +2,8 @@
 
 namespace CollectReviews\Integrations;
 
+use CollectReviews\ModuleInterface;
+
 /**
  * Class AbstractIntegration. Base class for integration.
  *
@@ -9,7 +11,7 @@ namespace CollectReviews\Integrations;
  *
  * @since 1.0.0
  */
-abstract class AbstractIntegration {
+abstract class AbstractIntegration implements ModuleInterface {
 
 	/**
 	 * Integration options.
@@ -37,21 +39,6 @@ abstract class AbstractIntegration {
 	public function __construct() {
 
 		$this->options = collect_reviews()->get( 'options' )->get( 'integrations.' . static::get_slug() );
-	}
-
-	/**
-	 * Initialize integration.
-	 *
-	 * @since 1.0.0
-	 */
-	public function init() {
-
-		if (
-			method_exists( $this->handler, 'hooks' ) &&
-			$this->is_available() && $this->is_enabled()
-		) {
-			$this->handler->hooks();
-		}
 	}
 
 	/**

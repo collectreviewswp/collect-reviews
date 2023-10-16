@@ -25,6 +25,16 @@ class Integration extends AbstractIntegration implements EcommerceIntegrationInt
 	}
 
 	/**
+	 * Register hooks.
+	 *
+	 * @since 1.0.0
+	 */
+	public function hooks() {
+
+		add_action( 'edd_before_payment_status_change', [ $this->handler, 'order_status_changed' ], 10, 3 );
+	}
+
+	/**
 	 * Get the slug of the integration.
 	 *
 	 * @since 1.0.0

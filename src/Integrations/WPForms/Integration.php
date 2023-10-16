@@ -26,6 +26,16 @@ class Integration extends AbstractIntegration implements FormsIntegrationInterfa
 	}
 
 	/**
+	 * Register hooks.
+	 *
+	 * @since 1.0.0
+	 */
+	public function hooks() {
+
+		add_action( 'wpforms_process_complete', [ $this->handler, 'form_submitted' ], 10, 4 );
+	}
+
+	/**
 	 * Get the slug of the integration.
 	 *
 	 * @since 1.0.0

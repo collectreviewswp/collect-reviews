@@ -3,7 +3,6 @@
 namespace CollectReviews\Integrations\WooCommerce;
 
 use CollectReviews\Integrations\AbstractHandler;
-use CollectReviews\ModuleInterface;
 use CollectReviews\ReviewRequests\ReviewRequestsLimiter;
 use WC_Order;
 
@@ -12,17 +11,7 @@ use WC_Order;
  *
  * @since 1.0.0
  */
-class Handler extends AbstractHandler implements ModuleInterface {
-
-	/**
-	 * Register hooks.
-	 *
-	 * @since 1.0.0
-	 */
-	public function hooks() {
-
-		add_action( 'woocommerce_order_status_changed', [ $this, 'order_status_changed' ], 10, 4 );
-	}
+class Handler extends AbstractHandler {
 
 	/**
 	 * Handle order status change. Create review request if order status matches any trigger.
@@ -35,6 +24,10 @@ class Handler extends AbstractHandler implements ModuleInterface {
 	 * @param WC_Order    $order       Order instance.
 	 */
 	public function order_status_changed( $order_id, $status_from, $status_to, WC_Order $order ) {
+
+		if ( ! $this->integration->is_enabled() || ! $this->integration->is_configured() ) {
+			return;
+		}
 
 		if ( empty( $order ) ) {
 			$order = wc_get_order( $order_id );
@@ -49,10 +42,6 @@ class Handler extends AbstractHandler implements ModuleInterface {
 		}
 
 		$options = $this->integration->get_options();
-
-		if ( empty( $options['enabled'] ) || empty( $options['triggers'] ) ) {
-			return;
-		}
 
 		// Skip early if any trigger doesn't have current order status.
 		$trigger_order_status = array_column( $options['triggers'], 'order_status' );
