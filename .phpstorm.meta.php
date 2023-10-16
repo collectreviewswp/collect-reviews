@@ -18,7 +18,8 @@ namespace PHPSTORM_META {
 				'templates'    => \CollectReviews\TemplateLoader::class,
 				'config'       => \CollectReviews\Config::class,
 				'admin'        => \CollectReviews\Admin\Admin::class,
-				'integrations' => \CollectReviews\Integrations\IntegrationsManager::class,
+				'integrations' => \CollectReviews\Integrations\Integrations::class,
+				'platforms'    => \CollectReviews\Platforms\Platforms::class,
 			]
 		)
 	);
