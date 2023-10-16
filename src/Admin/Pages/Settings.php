@@ -54,14 +54,14 @@ class Settings implements ModuleInterface {
 		$logo_raw = $data['review_request_email']['logo_raw'] ?? [];
 
 		if ( ! empty( $logo_raw ) && isset( $logo_raw['url'], $logo_raw['width'], $logo_raw['height'] ) ) {
-			$logo_filename = $this->upload_review_request_email_logo( $logo_raw['url'] );
+			$logo_filename = $this->upload_review_request_email_logo( esc_url_raw( $logo_raw['url'], [ 'data' ] ) );
 
 			// TODO: Handle error (next release).
 			if ( ! is_wp_error( $logo_filename ) ) {
 				$data['review_request_email']['logo'] = [
 					'filename' => $logo_filename,
-					'width'    => $logo_raw['width'],
-					'height'   => $logo_raw['height'],
+					'width'    => intval( $logo_raw['width'] ),
+					'height'   => intval( $logo_raw['height'] ),
 				];
 			}
 

@@ -80,7 +80,7 @@ class Scripts implements ModuleInterface {
 			'ajax_url'                 => admin_url( 'admin-ajax.php' ),
 			'plugin_url'               => collect_reviews()->get_plugin_url(),
 			'options'                  => collect_reviews()->get( 'options' )->get_all(),
-			'page'                     => $_GET['page'] ?? '',
+			'page'                     => isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '',
 			'integrations'             => array_values( $integrations ),
 			'platforms'                => collect_reviews()->get( 'platforms' )->get_platforms_data(),
 			'review_requests_page_url' => collect_reviews()->get( 'admin' )->get_admin_page_url( 'review-requests' ),

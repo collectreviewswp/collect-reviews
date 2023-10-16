@@ -90,14 +90,14 @@ class ReviewRequests implements ModuleInterface {
 
 				if ( ! empty( $order_id ) ) {
 					$order_ref = [
-						'text' => sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), $order_id ),
+						'text' => sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), intval( $order_id ) ),
 					];
 
 					if ( function_exists( 'WC' ) ) {
 						$order = wc_get_order( $order_id );
 
 						if ( ! empty( $order ) ) {
-							$order_ref['text'] = sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), $order->get_order_number() );
+							$order_ref['text'] = sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), esc_html( $order->get_order_number() ) );
 							$order_ref['url']  = admin_url( 'post.php?post=' . $order_id . '&action=edit' );
 						}
 					}
@@ -109,7 +109,7 @@ class ReviewRequests implements ModuleInterface {
 
 				if ( ! empty( $payment_id ) ) {
 					$order_ref = [
-						'text' => sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), $payment_id ),
+						'text' => sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), intval( $payment_id ) ),
 					];
 
 					if ( function_exists( 'EDD' ) ) {
@@ -127,7 +127,7 @@ class ReviewRequests implements ModuleInterface {
 
 				if ( ! empty( $form_id ) ) {
 					$form_ref = [
-						'text' => sprintf( esc_html__( 'Form #%s', 'collect-reviews' ), $form_id ),
+						'text' => sprintf( esc_html__( 'Form #%s', 'collect-reviews' ), intval( $form_id ) ),
 					];
 
 					if ( function_exists( 'wpforms' ) ) {
@@ -145,8 +145,8 @@ class ReviewRequests implements ModuleInterface {
 
 				if ( ! empty( $entry_id ) ) {
 					$entry_ref = [
-						'text' => sprintf( esc_html__( 'Entry #%s', 'collect-reviews' ), $entry_id ),
-						'url'  => admin_url( 'admin.php?page=wpforms-entries&view=details&entry_id=' . $entry_id ),
+						'text' => sprintf( esc_html__( 'Entry #%s', 'collect-reviews' ), intval( $entry_id ) ),
+						'url'  => esc_url( admin_url( 'admin.php?page=wpforms-entries&view=details&entry_id=' . intval( $entry_id ) ) ),
 					];
 
 					$refs[] = $entry_ref;

@@ -97,7 +97,7 @@ class RatingStars implements SmartTagInterface {
 												}
 											}
 
-											echo $starts;
+											echo wp_kses_post( $starts );
 											?>
 										</span>
 										<span><!--[if mso]><i style="letter-spacing: 10px;mso-font-width:-100%" hidden>&nbsp;</i><![endif]--></span>
