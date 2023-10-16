@@ -83,13 +83,23 @@ class ReviewRequestEmail implements EmailInterface {
 			return false;
 		}
 
-		$smart_tags = new Processor( $this->smart_tags );
+		$smart_tags  = new Processor( $this->smart_tags );
+		$footer_text = $smart_tags->process( $this->options['footer_text'] );
+
+		// TODO: Implement UI (next release).
+		// Clear footer text if action smart tag is empty and present in footer text.
+		if (
+			strpos( $this->options['footer_text'], '{{action}}' ) !== false &&
+			empty( $this->smart_tags['{{action}}']->get_value() )
+		) {
+			$footer_text = '';
+		}
 
 		$template = new Template(
 			$smart_tags->process( $this->options['content'] ),
 			[
 				'logo'        => $this->options['logo'],
-				'footer_text' => $smart_tags->process( $this->options['footer_text'] ),
+				'footer_text' => $footer_text,
 			]
 		);
 
