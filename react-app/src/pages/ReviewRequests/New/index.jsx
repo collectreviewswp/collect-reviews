@@ -171,7 +171,7 @@ const NewReviewRequest = () => {
 									>
 										<MenuItem value="custom">{__( 'custom', 'collect-reviews' )}</MenuItem>
 
-										{(data.config?.platforms || []).map( ( {slug, name} ) =>
+										{(data.platforms || []).map( ( {slug, name} ) =>
 											<MenuItem key={slug} value={slug}>{name}</MenuItem>
 										)}
 									</Select>

@@ -8,6 +8,7 @@ use CollectReviews\Admin\Pages\ReviewRequests as ReviewRequestsAdminPage;
 use CollectReviews\Admin\Pages\Settings as SettingsPage;
 use CollectReviews\Ajax\AjaxManager;
 use CollectReviews\Integrations\IntegrationsManager;
+use CollectReviews\Platforms\Platforms;
 use CollectReviews\ReviewRequests\Migrations\ReviewRequestsLimitLogsTable;
 use CollectReviews\ReviewRequests\Migrations\ReviewRequestsMetaTable;
 use CollectReviews\ReviewRequests\Migrations\ReviewRequestsTable;
@@ -102,7 +103,6 @@ class Core {
 		$this->container->add( Request::class, 'request' );
 		$this->container->add( Options::class, 'options' );
 		$this->container->add( TemplateLoader::class, 'templates' );
-		$this->container->add( Config::class, 'config' );
 
 		$this->container->add_module( AjaxManager::class, 'ajax' );
 
@@ -117,6 +117,8 @@ class Core {
 
 		$this->container->add( IntegrationsManager::class, 'integrations' )
 										->resolve()->init_integrations();
+
+		$this->container->add( Platforms::class, 'platforms' );
 	}
 
 	/**

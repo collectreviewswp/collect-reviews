@@ -107,7 +107,7 @@ class Platform {
 
 		// If name is not defined, try to get it from the platforms config based on the platform type.
 		if ( empty( $this->name ) && $this->type !== 'custom' ) {
-			$platforms  = collect_reviews()->get( 'config' )->get( 'platforms' );
+			$platforms  = collect_reviews()->get( 'platforms' )->get_platforms_data();
 			$this->name = Collection::find( $platforms, 'slug', $this->type, 'name', ucfirst( $this->type ) );
 		}
 
