@@ -82,16 +82,16 @@ class Options {
 	}
 
 	/**
-	 * Set options.
+	 * Save options to DB.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $data  Options data.
 	 * @param bool  $merge Whether to merge with existing options or overwrite all option with provided.
 	 *
-	 * @return $this
+	 * @return bool
 	 */
-	public function set( $data, $merge = true ) {
+	public function update( $data, $merge = true ) {
 
 		$data = $this->process( $data );
 
@@ -100,24 +100,6 @@ class Options {
 		}
 
 		$this->options = $data;
-
-		return $this;
-	}
-
-	/**
-	 * Save options to DB.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool $update Whether to update options if they already exist.
-	 *
-	 * @return bool
-	 */
-	public function save( $update = true ) {
-
-		if ( ! $update ) {
-			return add_option( self::OPTION_NAME, $this->options );
-		}
 
 		return update_option( self::OPTION_NAME, $this->options );
 	}

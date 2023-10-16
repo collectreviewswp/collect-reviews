@@ -166,7 +166,9 @@ class Core {
 		// Set default options.
 		$options = new Options();
 
-		$options->set( $options->get_default() )->save( true );
+		if ( empty( $options->get_all() ) ) {
+			$options->update( $options->get_default() );
+		}
 	}
 
 	/**

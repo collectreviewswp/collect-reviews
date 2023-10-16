@@ -68,7 +68,7 @@ class Settings implements ModuleInterface {
 			unset( $data['review_request_email']['logo_raw'] );
 		}
 
-		$options->set( $data )->save();
+		$options->update( $data );
 
 		return $options->get_all();
 	}
