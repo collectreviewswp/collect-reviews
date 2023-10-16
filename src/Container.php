@@ -112,17 +112,17 @@ final class Container {
 			'priority' => 10,
 		] );
 
-		$module = $this->add( $class, $args['alias'] )->resolve();
-
-		if ( ! $module instanceof ModuleInterface ) {
-			return;
-		}
+		$this->add( $class, $args['alias'] );
 
 		$hook = $args['hook'];
 
 		// Initialize module.
-		$callback = function () use ( $module ) {
-			$module->hooks();
+		$callback = function () use ( $class, $args ) {
+			$module = $this->get( ! is_null( $args['alias'] ) ? $args['alias'] : $class );
+
+			if ( $module instanceof ModuleInterface ) {
+				$module->hooks();
+			}
 		};
 
 		if ( $hook ) {
