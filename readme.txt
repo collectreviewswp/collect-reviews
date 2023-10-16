@@ -2,7 +2,7 @@
 Contributors: collectreviewswp
 Tags: customer reviews, reviews collection, google reviews, trustpilot reviews, woocommerce, wpforms, easy digital downloads
 Requires at least: 5.3
-Tested up to: 6.2
+Tested up to: 6.3
 Stable tag: 1.0.0
 Requires PHP: 7.2
 License: GPLv3
