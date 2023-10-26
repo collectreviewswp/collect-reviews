@@ -88,9 +88,7 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$table = ReviewRequestsTable::get_table_name();
-
-		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE id = %d", $review_request->get_id() ) );
+		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->collect_reviews_review_requests WHERE id = %d", $review_request->get_id() ) );
 
 		if ( empty( $result ) ) {
 			$review_request->set_id( 0 );
@@ -174,9 +172,7 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$table = ReviewRequestsTable::get_table_name();
-
-		return (bool) $wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id = %d", $review_request->get_id() ) );
+		return (bool) $wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->collect_reviews_review_requests WHERE id = %d", $review_request->get_id() ) );
 	}
 
 	/**
@@ -196,9 +192,7 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$table = ReviewRequestsMetaTable::get_table_name();
-
-		$result = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM {$table} WHERE review_request_id = %d", $review_request->get_id() ) );
+		$result = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->collect_reviews_review_requests_meta WHERE review_request_id = %d", $review_request->get_id() ) );
 
 		$meta = [];
 
@@ -224,8 +218,6 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$table = ReviewRequestsMetaTable::get_table_name();
-
 		$values = [];
 
 		foreach ( $review_request->get_meta() as $meta_key => $meta_value ) {
@@ -235,7 +227,8 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 		$values = implode( ',', $values );
 
 		$wpdb->query(
-			"INSERT INTO {$table} (review_request_id, meta_key, meta_value) VALUES {$values}
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			"INSERT INTO {$wpdb->collect_reviews_review_requests_meta} (review_request_id, meta_key, meta_value) VALUES {$values}
 			ON DUPLICATE KEY UPDATE review_request_id=values(review_request_id),meta_key=values(meta_key),meta_value=values(meta_value)"
 		);
 	}
@@ -253,7 +246,6 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$table  = ReviewRequestsTable::get_table_name();
 		$where  = $this->build_where( $args );
 		$order  = '';
 		$offset = isset( $args['offset'] ) ? intval( $args['offset'] ) : 0;
@@ -268,7 +260,8 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 			$limit .= $wpdb->prepare( ', %d', $args['per_page'] );
 		}
 
-		$results = $wpdb->get_results( "SELECT * FROM $table WHERE {$where} {$order} {$limit}" );
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$results = $wpdb->get_results( "SELECT * FROM $wpdb->collect_reviews_review_requests WHERE {$where} {$order} {$limit}" );
 
 		if ( isset( $args['return_format'] ) && $args['return_format'] === 'raw' ) {
 			return ! empty( $results ) ? $results : [];
@@ -302,11 +295,10 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$table = ReviewRequestsTable::get_table_name();
-
 		$where = $this->build_where( $args );
 
-		return (int) $wpdb->get_var( "SELECT COUNT(id) FROM $table WHERE {$where}" );
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return (int) $wpdb->get_var( "SELECT COUNT(id) FROM $wpdb->collect_reviews_review_requests WHERE {$where}" );
 	}
 
 	/**

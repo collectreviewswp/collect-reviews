@@ -40,6 +40,8 @@ class ReviewRequestsMetaTable extends AbstractTableMigration {
 	 */
 	protected function migrate_to_1() {
 
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
 		global $wpdb;
 
 		$table   = self::get_table_name();
@@ -52,28 +54,23 @@ class ReviewRequestsMetaTable extends AbstractTableMigration {
 		/*
 		 * Create the table.
 		 */
-		$sql = "
-		CREATE TABLE `$table` (
-		    `meta_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-		    `review_request_id` BIGINT UNSIGNED NOT NULL,
-		    `meta_key` VARCHAR(255) DEFAULT NULL,
-		    `meta_value` LONGTEXT DEFAULT NULL,
-		    PRIMARY KEY (meta_id),
-		    UNIQUE KEY review_request_id_meta_key (review_request_id,meta_key),
-		    INDEX review_request_id (review_request_id),
-		    INDEX meta_key (meta_key)
+		$sql = "CREATE TABLE $table (
+				meta_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+				review_request_id BIGINT UNSIGNED NOT NULL,
+				meta_key VARCHAR(255) DEFAULT NULL,
+				meta_value LONGTEXT DEFAULT NULL,
+				PRIMARY KEY (meta_id),
+				UNIQUE KEY review_request_id_meta_key (review_request_id,meta_key),
+				INDEX review_request_id (review_request_id),
+				INDEX meta_key (meta_key)
 		) {$collate};";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$result = $wpdb->query( $sql );
+		dbDelta( $sql );
 
-		if ( ! empty( $wpdb->last_error ) ) {
-			$this->set_error( $wpdb->last_error );
-		}
-
-		// Save the current version to DB.
-		if ( $result !== false ) {
+		if ( empty( $wpdb->last_error ) ) {
 			$this->update_db_ver( 1 );
+		} else {
+			$this->set_error( $wpdb->last_error );
 		}
 	}
 }

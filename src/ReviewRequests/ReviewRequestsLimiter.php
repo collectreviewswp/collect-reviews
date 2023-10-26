@@ -52,23 +52,23 @@ class ReviewRequestsLimiter {
 
 		global $wpdb;
 
-		$table = ReviewRequestsLimitLogsTable::get_table_name();
-
 		if ( $frequency > 0 ) {
-			$query = $wpdb->prepare(
-				"SELECT * FROM {$table} WHERE email = %s AND last_created_date > DATE_SUB(%s, INTERVAL %d DAY)",
-				$this->email,
-				current_time( 'mysql', true ),
-				$frequency
+			$result = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->collect_reviews_review_requests_limit_logs} WHERE email = %s AND last_created_date > DATE_SUB(%s, INTERVAL %d DAY)",
+					$this->email,
+					current_time( 'mysql', true ),
+					$frequency
+				)
 			);
 		} else {
-			$query = $wpdb->prepare(
-				"SELECT * FROM {$table} WHERE email = %s",
-				$this->email
+			$result = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->collect_reviews_review_requests_limit_logs} WHERE email = %s",
+					$this->email
+				)
 			);
 		}
-
-		$result = $wpdb->get_row( $query );
 
 		return ! empty( $result );
 	}
@@ -82,11 +82,9 @@ class ReviewRequestsLimiter {
 
 		global $wpdb;
 
-		$table = ReviewRequestsLimitLogsTable::get_table_name();
-
 		$wpdb->query(
 			$wpdb->prepare(
-				"INSERT INTO {$table} (email, last_created_date) VALUES (%s, %s)
+				"INSERT INTO {$wpdb->collect_reviews_review_requests_limit_logs} (email, last_created_date) VALUES (%s, %s)
 				ON DUPLICATE KEY UPDATE last_created_date=values(last_created_date)",
 				$this->email,
 				current_time( 'mysql', true )

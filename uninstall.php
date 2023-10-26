@@ -33,7 +33,7 @@ $db_tables = [
 ];
 
 foreach ( $db_tables as $table ) {
-	$wpdb->query( "DROP TABLE IF EXISTS $table;" );
+	$wpdb->query( 'DROP TABLE IF EXISTS ' . esc_sql( $table ) . ';' );
 }
 
 // Remove queue cron job.

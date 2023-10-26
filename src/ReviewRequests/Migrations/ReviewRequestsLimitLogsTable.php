@@ -41,6 +41,8 @@ class ReviewRequestsLimitLogsTable extends AbstractTableMigration {
 	 */
 	protected function migrate_to_1() {
 
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
 		global $wpdb;
 
 		$table   = self::get_table_name();
@@ -53,25 +55,20 @@ class ReviewRequestsLimitLogsTable extends AbstractTableMigration {
 		/*
 		 * Create the table.
 		 */
-		$sql = "
-		CREATE TABLE `$table` (
-		    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-		    `email` VARCHAR(320) NOT NULL,
-		    `last_created_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-		    PRIMARY KEY (id),
-		    UNIQUE KEY email (email)
+		$sql = "CREATE TABLE $table (
+				id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+				email VARCHAR(320) NOT NULL,
+				last_created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY (id),
+				UNIQUE KEY email (email)
 		) {$collate};";
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$result = $wpdb->query( $sql );
+		dbDelta( $sql );
 
-		if ( ! empty( $wpdb->last_error ) ) {
-			$this->set_error( $wpdb->last_error );
-		}
-
-		// Save the current version to DB.
-		if ( $result !== false ) {
+		if ( empty( $wpdb->last_error ) ) {
 			$this->update_db_ver( 1 );
+		} else {
+			$this->set_error( $wpdb->last_error );
 		}
 	}
 }
