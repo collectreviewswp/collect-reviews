@@ -2,7 +2,7 @@
 
 namespace CollectReviews\ReviewRequests\Migrations;
 
-use CollectReviews\AbstractMigration;
+use CollectReviews\DatabaseMigrations\AbstractTableMigration;
 
 /**
  * Class ReviewRequestsMetaTable.
@@ -11,7 +11,7 @@ use CollectReviews\AbstractMigration;
  *
  * @since 1.0.0
  */
-class ReviewRequestsMetaTable extends AbstractMigration {
+class ReviewRequestsMetaTable extends AbstractTableMigration {
 
 	/**
 	 * Get the table name.

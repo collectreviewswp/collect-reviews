@@ -1,9 +1,9 @@
 <?php
 
-namespace CollectReviews;
+namespace CollectReviews\DatabaseMigrations;
 
 /**
- * Class AbstractMigration.
+ * Class AbstractTableMigration.
  *
  * Helps migrate plugin DB tables.
  *
@@ -15,7 +15,7 @@ namespace CollectReviews;
  *
  * @since 1.0.0
  */
-abstract class AbstractMigration {
+abstract class AbstractTableMigration {
 
 	/**
 	 * Current migration version.
@@ -34,16 +34,6 @@ abstract class AbstractMigration {
 	public function __construct() {
 
 		$this->current_version = static::get_current_version();
-	}
-
-	/**
-	 * Initialize migration.
-	 *
-	 * @since 1.0.0
-	 */
-	public function init() {
-
-		$this->validate_db();
 	}
 
 	/**
@@ -131,7 +121,7 @@ abstract class AbstractMigration {
 	 *
 	 * @since 1.0.0
 	 */
-	protected function validate_db() {
+	public function validate_db() {
 
 		if ( $this->current_version < static::get_latest_version() ) {
 			$this->run( static::get_latest_version() );

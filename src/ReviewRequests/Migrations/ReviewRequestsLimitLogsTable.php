@@ -2,7 +2,7 @@
 
 namespace CollectReviews\ReviewRequests\Migrations;
 
-use CollectReviews\AbstractMigration;
+use CollectReviews\DatabaseMigrations\AbstractTableMigration;
 
 /**
  * Class ReviewRequestsLimitLogsTable.
@@ -12,7 +12,7 @@ use CollectReviews\AbstractMigration;
  *
  * @since 1.0.0
  */
-class ReviewRequestsLimitLogsTable extends AbstractMigration {
+class ReviewRequestsLimitLogsTable extends AbstractTableMigration {
 
 	/**
 	 * Get the table name.

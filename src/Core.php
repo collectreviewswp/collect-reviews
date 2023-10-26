@@ -7,11 +7,9 @@ use CollectReviews\Admin\Scripts;
 use CollectReviews\Admin\Pages\ReviewRequests as ReviewRequestsAdminPage;
 use CollectReviews\Admin\Pages\Settings as SettingsPage;
 use CollectReviews\Ajax\AjaxManager;
+use CollectReviews\DatabaseMigrations\DatabaseMigrations;
 use CollectReviews\Integrations\Integrations;
 use CollectReviews\Platforms\Platforms;
-use CollectReviews\ReviewRequests\Migrations\ReviewRequestsLimitLogsTable;
-use CollectReviews\ReviewRequests\Migrations\ReviewRequestsMetaTable;
-use CollectReviews\ReviewRequests\Migrations\ReviewRequestsTable;
 use CollectReviews\ReviewRequests\Queue;
 use CollectReviews\ReviewReplies\ReviewReplyPage;
 use Exception;
@@ -66,6 +64,7 @@ class Core {
 
 		// Load all the plugin.
 		$this->hooks();
+		$this->init_early();
 	}
 
 	/**
@@ -90,7 +89,18 @@ class Core {
 	public function init() {
 
 		$this->boot();
-		$this->init_migrations();
+	}
+
+	/**
+	 * Functionality that should be initialized before `plugins_loaded` hook.
+	 *
+	 * @since 1.0.0
+	 */
+	private function init_early() {
+
+		// Define database tables.
+		$db_migrations = new DatabaseMigrations();
+		$db_migrations->define_tables();
 	}
 
 	/**
@@ -103,6 +113,8 @@ class Core {
 		$this->container->add( Request::class, 'request' );
 		$this->container->add( Options::class, 'options' );
 		$this->container->add( TemplateLoader::class, 'templates' );
+
+		$this->container->add_module( DatabaseMigrations::class, 'db-migrations' );
 
 		$this->container->add_module( AjaxManager::class, 'ajax' );
 
@@ -124,32 +136,6 @@ class Core {
 		$this->container->add( Integrations::class, 'integrations' );
 
 		$this->container->add( Platforms::class, 'platforms' );
-	}
-
-	/**
-	 * Initialize database migrations.
-	 *
-	 * @since 1.0.0
-	 */
-	private function init_migrations() {
-
-		if ( ! $this->get( 'request' )->is_admin() ) {
-			return;
-		}
-
-		add_action( 'admin_init', function () {
-
-			$migrations = [
-				ReviewRequestsTable::class,
-				ReviewRequestsMetaTable::class,
-				ReviewRequestsLimitLogsTable::class,
-			];
-
-			foreach ( $migrations as $class_name ) {
-				$migration = new $class_name();
-				$migration->init();
-			}
-		} );
 	}
 
 	/**
