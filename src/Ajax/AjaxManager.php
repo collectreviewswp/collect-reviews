@@ -93,8 +93,13 @@ class AjaxManager implements ModuleInterface {
 	 */
 	public function handle() {
 
+		// Check nonce.
+		if ( check_ajax_referer( 'collect_reviews_ajax', '_wpnonce', false ) === false ) {
+			wp_send_json_error( esc_html__( 'Something went wrong. Try again later.', 'collect-reviews' ) );
+		}
+
 		if ( ! isset( $_REQUEST['task'] ) ) {
-			wp_send_json_error();
+			wp_send_json_error( esc_html__( 'Missed task parameter.', 'collect-reviews' ) );
 		}
 
 		$task = sanitize_key( $_REQUEST['task'] );

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import {normalizeOptions} from "./data";
 
-const {ajax_url} = window.collectReviews;
+const {ajax_url, ajax_nonce} = window.collect_reviews_admin;
 
 class Api {
 
@@ -16,6 +16,7 @@ class Api {
 			headers: {'content-type': 'application/x-www-form-urlencoded'},
 			data: {
 				action: this.#action,
+				_wpnonce: ajax_nonce,
 				task: task,
 				data: data
 			},
@@ -28,6 +29,7 @@ class Api {
 			method: 'get',
 			params: {
 				action: this.#action,
+				_wpnonce: ajax_nonce,
 				task: task,
 				data: data
 			},

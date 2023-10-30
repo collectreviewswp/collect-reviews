@@ -92,7 +92,8 @@ class ReviewReplyPage implements ModuleInterface {
 			'collect-reviews',
 			'collect_reviews',
 			[
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'ajax_url'   => admin_url( 'admin-ajax.php' ),
+				'ajax_nonce' => wp_create_nonce( 'collect_reviews_ajax' ),
 			]
 		);
 	}

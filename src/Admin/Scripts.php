@@ -78,6 +78,7 @@ class Scripts implements ModuleInterface {
 
 		$data = [
 			'ajax_url'                 => admin_url( 'admin-ajax.php' ),
+			'ajax_nonce'               => wp_create_nonce( 'collect_reviews_ajax' ),
 			'plugin_url'               => collect_reviews()->get_plugin_url(),
 			'options'                  => collect_reviews()->get( 'options' )->get_all(),
 			'page'                     => isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '',
@@ -86,6 +87,6 @@ class Scripts implements ModuleInterface {
 			'review_requests_page_url' => collect_reviews()->get( 'admin' )->get_admin_page_url( 'review-requests' ),
 		];
 
-		wp_localize_script( $script_handle, 'collectReviews', $data );
+		wp_localize_script( $script_handle, 'collect_reviews_admin', $data );
 	}
 }

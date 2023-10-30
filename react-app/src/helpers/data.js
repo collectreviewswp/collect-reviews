@@ -1,4 +1,4 @@
-const {collectReviews = {}} = window;
+const {collect_reviews_admin = {}} = window;
 
 let normalizeOptions = function( o ) {
 	for ( let i in o ) {
@@ -10,8 +10,8 @@ let normalizeOptions = function( o ) {
 	}
 };
 
-normalizeOptions( collectReviews );
+normalizeOptions( collect_reviews_admin );
 
 export {normalizeOptions};
 
-export default collectReviews;
+export default collect_reviews_admin;

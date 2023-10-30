@@ -15,6 +15,7 @@ jQuery( document ).ready( function( $ ) {
 					url: collect_reviews.ajax_url,
 					data: {
 						action: 'collect_reviews_ajax',
+						_wpnonce: collect_reviews.ajax_nonce,
 						task: 'positive_review_link_click',
 						data: {
 							review_request_id: $reviewLink.data( 'review-request-id' ),
@@ -41,6 +42,7 @@ jQuery( document ).ready( function( $ ) {
 					url: collect_reviews.ajax_url,
 					data: {
 						action: 'collect_reviews_ajax',
+						_wpnonce: collect_reviews.ajax_nonce,
 						task: 'review_form_submit',
 						data: $( this ).serialize(),
 					},
