@@ -83,27 +83,12 @@ class Logo {
 			return;
 		}
 
-		$url = esc_url( $this->url, array_merge( wp_allowed_protocols(), [ 'data' ] ) );
-
-		$width_attr  = '';
-		$height_attr = '';
-
-		if ( $this->width ) {
-			$width_attr = 'width="' . intval( $this->width ) . '"';
-		}
-
-		if ( $this->height ) {
-			$height_attr = 'height="' . intval( $this->height ) . '"';
-		}
-
-		$site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-
 		printf(
 			'<img src="%s" %s %s alt="%s" style="max-width:300px;max-height:150px;display:block;margin:0 auto;outline:none;border:none;text-decoration:none;" >',
-			$url,
-			$width_attr,
-			$height_attr,
-			$site_name
+			esc_url( $this->url, array_merge( wp_allowed_protocols(), [ 'data' ] ) ),
+			$this->width ? 'width="' . intval( $this->width ) . '"' : '',
+			$this->height ? 'height="' . intval( $this->height ) . '"' : '',
+			esc_html( wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ) )
 		);
 	}
 }

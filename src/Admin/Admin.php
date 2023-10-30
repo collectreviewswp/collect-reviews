@@ -124,7 +124,6 @@ class Admin implements ModuleInterface {
 	public function display() {
 
 		// TODO: And error handling (next release).
-		ob_start();
 		?>
 		<style>
 			.collect-reviews-overlay {
@@ -164,7 +163,6 @@ class Admin implements ModuleInterface {
 			</div>
 		</div>
 		<?php
-		echo ob_get_clean();
 	}
 
 	/**
