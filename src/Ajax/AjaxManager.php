@@ -116,6 +116,10 @@ class AjaxManager implements ModuleInterface {
 			parse_str( $data, $data );
 		}
 
+		// Apply wp_kses_post_deep() to all data for basic sanitization.
+		// Further each key will be sanitized separately in the ajax handler.
+		$data = wp_kses_post_deep( $data );
+
 		$result = call_user_func( $this->handlers[ $task ]['callback'], $data );
 
 		if ( is_wp_error( $result ) ) {

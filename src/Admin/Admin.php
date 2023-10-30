@@ -193,7 +193,9 @@ class Admin implements ModuleInterface {
 			return false;
 		}
 
-		return isset( $_GET['page'] ) && substr( $_GET['page'], 0, 15 ) === self::SLUG;
+		$page = isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '';
+
+		return substr( $page, 0, 15 ) === self::SLUG;
 	}
 
 	/**
