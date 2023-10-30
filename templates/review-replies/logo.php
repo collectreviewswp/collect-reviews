@@ -5,6 +5,11 @@
  * @since 1.0.0
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use CollectReviews\Helpers\Uploads;
 
 $logo = collect_reviews()->get( 'options' )->get( 'review_request_email.logo' );

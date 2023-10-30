@@ -5,6 +5,11 @@
  * @since 1.0.0
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use CollectReviews\ReviewRequests\ReviewRequest;
 
 $review_request = get_query_var( 'collect_reviews_review_request' );

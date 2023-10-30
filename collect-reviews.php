@@ -11,6 +11,11 @@
  * Text Domain: collect-reviews
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! defined( 'COLLECT_REVIEWS_PLUGIN_VER' ) ) {
 	define( 'COLLECT_REVIEWS_PLUGIN_VER', '1.0.0' );
 }
