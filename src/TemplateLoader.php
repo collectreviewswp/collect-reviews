@@ -12,39 +12,24 @@ namespace CollectReviews;
 class TemplateLoader {
 
 	/**
-	 * Get the template contents.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $template Template name.
-	 * @param array  $data     Template data.
-	 *
-	 * @return string
-	 */
-	public function get_template( $template, $data = [] ) {
-
-		$path = $this->get_template_path( $template );
-
-		if ( ! $path ) {
-			return '';
-		}
-
-		ob_start();
-		require $path;
-		return ob_get_clean();
-	}
-
-	/**
 	 * Display the template contents.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $template Template name.
-	 * @param array  $data     Template data.
+	 * @param array $data Template data.
+	 *
+	 * @return void|false Void on success, false if the template does not exist.
 	 */
 	public function display_template( $template, $data = [] ) {
 
-		echo $this->get_template( $template, $data );
+		$path = $this->get_template_path( $template );
+
+		if ( ! $path ) {
+			return false;
+		}
+
+		require $path;
 	}
 
 	/**
