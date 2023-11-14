@@ -57,7 +57,7 @@ class ReviewRequestsMetaTable extends AbstractTableMigration {
 		$sql = "CREATE TABLE $table (
 				meta_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 				review_request_id BIGINT UNSIGNED NOT NULL,
-				meta_key VARCHAR(255) DEFAULT NULL,
+				meta_key VARCHAR(240) DEFAULT NULL,
 				meta_value LONGTEXT DEFAULT NULL,
 				PRIMARY KEY (meta_id),
 				UNIQUE KEY review_request_id_meta_key (review_request_id,meta_key),

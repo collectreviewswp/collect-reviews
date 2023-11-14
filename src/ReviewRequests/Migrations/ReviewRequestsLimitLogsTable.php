@@ -57,7 +57,7 @@ class ReviewRequestsLimitLogsTable extends AbstractTableMigration {
 		 */
 		$sql = "CREATE TABLE $table (
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-				email VARCHAR(320) NOT NULL,
+				email VARCHAR(250) NOT NULL,
 				last_created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY (id),
 				UNIQUE KEY email (email)
