@@ -24,10 +24,6 @@ class Platforms {
 				'name' => esc_html__( 'Google', 'collect-reviews' ),
 			],
 			[
-				'slug' => 'trustpilot',
-				'name' => esc_html__( 'Trustpilot', 'collect-reviews' ),
-			],
-			[
 				'slug' => 'facebook',
 				'name' => esc_html__( 'Facebook', 'collect-reviews' ),
 			],

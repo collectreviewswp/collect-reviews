@@ -2,7 +2,6 @@ import React from 'react';
 
 import Google from "./Google";
 import Tripadvisor from "./Tripadvisor";
-import Trustpilot from "./Trustpilot";
 import Yelp from "./Yelp";
 import Facebook from "./Facebook";
 import Custom from "./Custom";
@@ -14,8 +13,6 @@ const PlatformInstruction = ( {platform} ) => {
 			return <Google/>;
 		case 'tripadvisor':
 			return <Tripadvisor/>;
-		case 'trustpilot':
-			return <Trustpilot/>;
 		case 'yelp':
 			return <Yelp/>;
 		case 'facebook':

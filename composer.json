@@ -1,6 +1,6 @@
 {
   "name": "collectreviewswp/collect-reviews",
-  "description": "The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Trustpilot.",
+  "description": "The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Facebook.",
   "type": "wordpress-plugin",
   "homepage": "https://wordpress.org/plugins/collect-reviews/",
   "license": "GPL-3.0-or-later",

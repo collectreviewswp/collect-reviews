@@ -1,6 +1,6 @@
 === Collect Reviews ===
 Contributors: collectreviewswp
-Tags: customer reviews, reviews collection, google reviews, trustpilot reviews, woocommerce, wpforms, easy digital downloads
+Tags: customer reviews, reviews collection, google reviews, facebook reviews, woocommerce, wpforms, easy digital downloads
 Requires at least: 5.3
 Tested up to: 6.3
 Stable tag: 1.0.0
@@ -8,11 +8,11 @@ Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Trustpilot.
+The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Facebook.
 
 == Description ==
 
-Collect Reviews is a powerful WordPress plugin designed to streamline the process of collecting reviews on various platforms like Google or Trustpilot to grow your business. Whether you're running an online store, a service-based business, or a content-driven website, the Collect Reviews plugin allows you automatically collect reviews from your customers. E.g. after purchase in your store or some form submission.
+Collect Reviews is a powerful WordPress plugin designed to streamline the process of collecting reviews on various platforms like Google or Facebook to grow your business. Whether you're running an online store, a service-based business, or a content-driven website, the Collect Reviews plugin allows you automatically collect reviews from your customers. E.g. after purchase in your store or some form submission.
 
 ### Collect reviews automatically
 

@@ -527,7 +527,7 @@ export default function Settings() {
 						<MetaBox title={__( 'Negative Reviews', 'collect-reviews' )}>
 							<Row>
 								<Typography>
-									{__( 'To prevent negative reviews on review platforms, if a customer chooses a negative rating in the review request email, they will be redirected to a feedback form instead of the review platform (Google, Trustpilot, etc.).', 'collect-reviews' )}
+									{__( 'To prevent negative reviews on review platforms, if a customer chooses a negative rating in the review request email, they will be redirected to a feedback form instead of the review platform (Google, Facebook, etc.).', 'collect-reviews' )}
 								</Typography>
 							</Row>
 
