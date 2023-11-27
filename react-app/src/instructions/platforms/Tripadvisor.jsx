@@ -9,6 +9,9 @@ import Image from "../components/Image";
 
 import {__, sprintf} from "@wordpress/i18n";
 
+import askReviewImg from 'assets/images/instructions/tripadvisor-ask-review.jpg';
+import reviewLinkImg from 'assets/images/instructions/tripadvisor-review-link.jpg';
+
 const Tripadvisor = () => {
 	return (
 		<>
@@ -30,7 +33,7 @@ const Tripadvisor = () => {
 						{__( 'Click the "Review" button at the top of the page.', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/tripadvisor-ask-review.jpg"/>
+					<Image src={askReviewImg}/>
 				</StepDescription>
 			</Step>
 
@@ -43,7 +46,7 @@ const Tripadvisor = () => {
 						{__( 'Copy the current URL from the browser address bar and paste it into the "Review URL" field.', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/tripadvisor-review-link.jpg"/>
+					<Image src={reviewLinkImg}/>
 				</StepDescription>
 			</Step>
 		</>

@@ -9,6 +9,9 @@ import Image from "../components/Image";
 
 import {__, sprintf} from "@wordpress/i18n";
 
+import askReviewImg from 'assets/images/instructions/yelp-ask-review.jpg';
+import reviewLinkImg from 'assets/images/instructions/yelp-review-link.jpg';
+
 const Yelp = () => {
 	return (
 		<>
@@ -30,7 +33,7 @@ const Yelp = () => {
 						{__( 'Click the "Write a review" button.', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/yelp-ask-review.jpg"/>
+					<Image src={askReviewImg}/>
 				</StepDescription>
 			</Step>
 
@@ -43,7 +46,7 @@ const Yelp = () => {
 						{__( 'Copy the current URL from the browser address bar and paste it into the "Review URL" field.', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/yelp-review-link.jpg"/>
+					<Image src={reviewLinkImg}/>
 				</StepDescription>
 			</Step>
 		</>

@@ -10,6 +10,9 @@ import Image from "../components/Image";
 
 import {__, sprintf} from "@wordpress/i18n";
 
+import askReviewImg from 'assets/images/instructions/google-ask-review.jpg';
+import reviewLinkImg from 'assets/images/instructions/google-review-link.jpg';
+
 const Google = () => {
 	return (
 		<>
@@ -34,7 +37,7 @@ const Google = () => {
 						{__( 'Scroll down to see options from your Google Business Profile. Click "Ask for reviews".', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/google-ask-review.jpg"/>
+					<Image src={askReviewImg}/>
 				</StepDescription>
 			</Step>
 
@@ -47,7 +50,7 @@ const Google = () => {
 						{__( 'In the popup, copy the provided URL and paste it into the "Review URL" field.', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/google-review-link.jpg"/>
+					<Image src={reviewLinkImg}/>
 				</StepDescription>
 			</Step>
 		</>

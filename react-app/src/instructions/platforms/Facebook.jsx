@@ -9,6 +9,9 @@ import Image from "../components/Image";
 
 import {__, sprintf} from "@wordpress/i18n";
 
+import askReviewImg from 'assets/images/instructions/facebook-ask-review.jpg';
+import reviewLinkImg from 'assets/images/instructions/facebook-review-link.jpg';
+
 const Facebook = () => {
 	return (
 		<>
@@ -30,7 +33,7 @@ const Facebook = () => {
 						{__( 'Click the "Reviews" menu item.', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/facebook-ask-review.jpg"/>
+					<Image src={askReviewImg}/>
 				</StepDescription>
 			</Step>
 
@@ -43,7 +46,7 @@ const Facebook = () => {
 						{__( 'Copy the current URL from the browser address bar and paste it into the "Review URL" field.', 'collect-reviews' )}
 					</Typography>
 
-					<Image src="https://collectreviewswp.com/instructions/facebook-review-link.jpg"/>
+					<Image src={reviewLinkImg}/>
 				</StepDescription>
 			</Step>
 		</>
