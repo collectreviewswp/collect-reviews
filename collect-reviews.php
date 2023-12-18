@@ -9,6 +9,7 @@
  * Author URI: https://collectreviewswp.com/
  * Network: false
  * Text Domain: collect-reviews
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 // Exit if accessed directly.
