@@ -218,18 +218,24 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$values = [];
+		$data_query  = [];
+		$data_values = [];
 
 		foreach ( $review_request->get_meta() as $meta_key => $meta_value ) {
-			$values[] = $wpdb->prepare( '(%d, %s, %s)', $review_request->get_id(), $meta_key, $meta_value );
+			$data_query[]  = '(%d, %s, %s)';
+			$data_values[] = $review_request->get_id();
+			$data_values[] = $meta_key;
+			$data_values[] = $meta_value;
 		}
 
-		$values = implode( ',', $values );
+		$data_query = implode( ',', $data_query );
 
 		$wpdb->query(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-			"INSERT INTO {$wpdb->collect_reviews_review_requests_meta} (review_request_id, meta_key, meta_value) VALUES {$values}
-			ON DUPLICATE KEY UPDATE review_request_id=values(review_request_id),meta_key=values(meta_key),meta_value=values(meta_value)"
+			$wpdb->prepare(
+				"INSERT INTO {$wpdb->collect_reviews_review_requests_meta} (review_request_id, meta_key, meta_value)
+				VALUES {$data_query} ON DUPLICATE KEY UPDATE review_request_id=values(review_request_id),meta_key=values(meta_key),meta_value=values(meta_value)",
+				$data_values
+			)
 		);
 	}
 
@@ -246,22 +252,28 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		global $wpdb;
 
-		$where  = $this->build_where( $args );
-		$order  = '';
-		$offset = isset( $args['offset'] ) ? intval( $args['offset'] ) : 0;
+		$where = $this->build_where( $args );
+
+		$order = '';
 
 		if ( ! empty( $args['order_by'] ) && ! empty( $args['order'] ) ) {
 			$order = 'ORDER BY ' . esc_sql( $args['order_by'] ) . ' ' . esc_sql( $args['order'] );
 		}
 
-		$limit = $wpdb->prepare( 'LIMIT %d', $offset );
+		$offset   = isset( $args['offset'] ) ? intval( $args['offset'] ) : 0;
+		$per_page = isset( $args['per_page'] ) ? intval( $args['per_page'] ) : - 1;
+		$limit    = 'LIMIT ' . $offset;
 
-		if ( ! empty( $args['per_page'] ) ) {
-			$limit .= $wpdb->prepare( ', %d', $args['per_page'] );
+		if ( $per_page > 0 ) {
+			$limit .= ', ' . $per_page;
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$results = $wpdb->get_results( "SELECT * FROM $wpdb->collect_reviews_review_requests WHERE {$where} {$order} {$limit}" );
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM $wpdb->collect_reviews_review_requests WHERE {$where['query']} {$order} {$limit}",
+				$where['values']
+			)
+		);
 
 		if ( isset( $args['return_format'] ) && $args['return_format'] === 'raw' ) {
 			return ! empty( $results ) ? $results : [];
@@ -297,8 +309,12 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 
 		$where = $this->build_where( $args );
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( "SELECT COUNT(id) FROM $wpdb->collect_reviews_review_requests WHERE {$where}" );
+		return (int) $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM $wpdb->collect_reviews_review_requests WHERE {$where['query']}",
+				$where['values']
+			)
+		);
 	}
 
 	/**
@@ -308,46 +324,54 @@ class ReviewRequestsDataStore implements ReviewRequestsDataStoreInterface {
 	 *
 	 * @param array $args Query arguments.
 	 *
-	 * @return string
+	 * @return array
 	 */
 	private function build_where( $args ) {
 
-		global $wpdb;
-
-		$where = '1=1';
+		$query  = '%d=%d';
+		$values = [ 1, 1 ];
 
 		if (
 			! empty( $args['id'] ) ||
 			! empty( $args['ids'] )
 		) {
 			if ( ! empty( $args['id'] ) ) {
-				$where .= $wpdb->prepare( ' AND id = %s', $args['id'] );
+				$query    .= ' AND id = %s';
+				$values[] = $args['id'];
 			} elseif ( ! empty( $args['ids'] ) ) {
-				$ids   = array_map( 'intval', $args['ids'] );
-				$where .= ' AND id IN (' . implode( ',', $ids ) . ')';
+				$query  .= ' AND id IN (' . implode( ',', array_fill( 0, count( $args['ids'] ), '%d' ) ) . ')';
+				$values = array_merge( $values, $args['ids'] );
 			}
 
 			// When some ID(s) defined - we should ignore all other possible filtering options.
-			return $where;
+			return [
+				'query'  => $query,
+				'values' => $values,
+			];
 		}
 
 		if ( ! empty( $args['email'] ) ) {
-			$where .= $wpdb->prepare( ' AND email = %s', $args['email'] );
+			$query    .= ' AND email = %s';
+			$values[] = $args['email'];
 		}
 
 		if ( isset( $args['status'] ) ) {
-			$where .= $wpdb->prepare( ' AND status = %d', $args['status'] );
+			$query    .= ' AND status = %d';
+			$values[] = $args['status'];
 		}
 
 		// TODO: maybe implement self basic date query (next release).
 		if ( ! empty( $args['date_query'] ) ) {
 			add_filter( 'date_query_valid_columns', [ $this, 'date_query_valid_columns' ] );
 			$date_query = new WP_Date_Query( $args['date_query'], 'created_date' );
-			$where      .= $date_query->get_sql();
+			$query      .= $date_query->get_sql();
 			remove_filter( 'date_query_valid_columns', [ $this, 'date_query_valid_columns' ] );
 		}
 
-		return $where;
+		return [
+			'query'  => $query,
+			'values' => $values,
+		];
 	}
 
 	/**
