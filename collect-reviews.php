@@ -30,13 +30,13 @@ if ( ! defined( 'COLLECT_REVIEWS_PLUGIN_FILE' ) ) {
 	define( 'COLLECT_REVIEWS_PLUGIN_FILE', __FILE__ );
 }
 
-if ( ! function_exists( 'collect_reviews_insecure_php_version_notice' ) ) {
+if ( ! function_exists( 'collect_reviews_unsupported_php_version_notice' ) ) {
 	/**
 	 * Display admin notice, if the server is using old/insecure PHP version.
 	 *
 	 * @since 1.0.0
 	 */
-	function collect_reviews_insecure_php_version_notice() {
+	function collect_reviews_unsupported_php_version_notice() {
 
 		?>
 		<div class="notice notice-error">
@@ -128,7 +128,7 @@ if ( ! function_exists( 'collect_reviews_unsupported_wp_version_notice' ) ) {
  * @since 1.0.0
  */
 if ( version_compare( phpversion(), COLLECT_REVIEWS_PHP_VER, '<' ) ) {
-	add_action( 'admin_notices', 'collect_reviews_insecure_php_version_notice' );
+	add_action( 'admin_notices', 'collect_reviews_unsupported_php_version_notice' );
 
 	return;
 }
