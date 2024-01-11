@@ -54,6 +54,10 @@ class Integrations {
 	 */
 	public function get_integration( $slug ) {
 
-		return collect_reviews()->get( $slug . '_integration' );
+		if ( ! isset( self::INTEGRATIONS[ $slug ] ) ) {
+			return null;
+		}
+
+		return collect_reviews()->get( self::INTEGRATIONS[ $slug ] );
 	}
 }

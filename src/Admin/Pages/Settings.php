@@ -5,7 +5,6 @@ namespace CollectReviews\Admin\Pages;
 use CollectReviews\Ajax\Ajaxable;
 use CollectReviews\Helpers\Uploads;
 use CollectReviews\Integrations\FormsIntegrationInterface;
-use CollectReviews\ModuleInterface;
 use CollectReviews\ReviewRequests\Email\Preview as ReviewRequestsEmailPreview;
 use WP_Error;
 
@@ -14,7 +13,7 @@ use WP_Error;
  *
  * @since 1.0.0
  */
-class Settings implements ModuleInterface {
+class Settings {
 
 	/**
 	 * Ajaxable trait.

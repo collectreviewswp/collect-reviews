@@ -2,7 +2,6 @@
 
 namespace CollectReviews\DatabaseMigrations;
 
-use CollectReviews\ModuleInterface;
 use CollectReviews\ReviewRequests\Migrations\ReviewRequestsLimitLogsTable;
 use CollectReviews\ReviewRequests\Migrations\ReviewRequestsMetaTable;
 use CollectReviews\ReviewRequests\Migrations\ReviewRequestsTable;
@@ -12,7 +11,7 @@ use CollectReviews\ReviewRequests\Migrations\ReviewRequestsTable;
  *
  * @since 1.0.0
  */
-class DatabaseMigrations implements ModuleInterface {
+class DatabaseMigrations {
 
 	/**
 	 * List of migrations classes.
@@ -26,6 +25,16 @@ class DatabaseMigrations implements ModuleInterface {
 		ReviewRequestsMetaTable::class,
 		ReviewRequestsLimitLogsTable::class,
 	];
+
+	/**
+	 * Initialize.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init() {
+
+		$this->define_tables();
+	}
 
 	/**
 	 * Register hooks.
@@ -57,7 +66,7 @@ class DatabaseMigrations implements ModuleInterface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function define_tables() {
+	private function define_tables() {
 		global $wpdb;
 
 		foreach ( self::MIGRATIONS as $migration ) {

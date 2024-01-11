@@ -2,8 +2,6 @@
 
 namespace CollectReviews\Integrations;
 
-use CollectReviews\ModuleInterface;
-
 /**
  * Class AbstractIntegration. Base class for integration.
  *
@@ -11,7 +9,7 @@ use CollectReviews\ModuleInterface;
  *
  * @since 1.0.0
  */
-abstract class AbstractIntegration implements ModuleInterface {
+abstract class AbstractIntegration {
 
 	/**
 	 * Integration options.

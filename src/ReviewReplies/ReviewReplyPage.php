@@ -5,7 +5,6 @@ namespace CollectReviews\ReviewReplies;
 use CollectReviews\Ajax\Ajaxable;
 use CollectReviews\Emails\Mailer;
 use CollectReviews\Helpers\Date;
-use CollectReviews\ModuleInterface;
 use CollectReviews\ReviewRequests\ReviewRequest;
 use WP_Error;
 
@@ -16,7 +15,7 @@ use WP_Error;
  *
  * @since 1.0.0
  */
-class ReviewReplyPage implements ModuleInterface {
+class ReviewReplyPage {
 
 	/**
 	 * Ajaxable trait.

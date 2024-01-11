@@ -71,64 +71,11 @@ final class Container {
 	 * @since 1.0.0
 	 *
 	 * @param string $class Class name.
-	 * @param string $alias Alias.
 	 *
 	 * @return DefinitionInterface
 	 */
-	public function add( $class, $alias = null ) {
+	public function add( $class ) {
 
-		$definition = $this->container->addShared( $class );
-
-		if ( ! empty( $alias ) ) {
-			$definition->setAlias( $alias );
-		}
-
-		return $definition;
-	}
-
-	/**
-	 * Adds a new module to the container and initializes it.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $class Class name.
-	 * @param array|string  $args  Arguments or alias.
-	 */
-	public function add_module( $class, $args = [] ) {
-
-		if ( $this->has( $class ) ) {
-			return;
-		}
-
-		if ( is_string( $args ) ) {
-			$args = [
-				'alias' => $args
-			];
-		}
-
-		$args = wp_parse_args( $args, [
-			'alias'    => null,
-			'hook'     => '',
-			'priority' => 10,
-		] );
-
-		$this->add( $class, $args['alias'] );
-
-		$hook = $args['hook'];
-
-		// Initialize module.
-		$callback = function () use ( $class, $args ) {
-			$module = $this->get( ! is_null( $args['alias'] ) ? $args['alias'] : $class );
-
-			if ( $module instanceof ModuleInterface ) {
-				$module->hooks();
-			}
-		};
-
-		if ( $hook ) {
-			add_action( $hook, $callback, intval( $args['priority'] ) );
-		} else {
-			$callback();
-		}
+		return $this->container->addShared( $class );
 	}
 }

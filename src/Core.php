@@ -2,16 +2,9 @@
 
 namespace CollectReviews;
 
-use CollectReviews\Admin\Admin;
-use CollectReviews\Admin\Scripts;
-use CollectReviews\Admin\Pages\ReviewRequests as ReviewRequestsAdminPage;
-use CollectReviews\Admin\Pages\Settings as SettingsPage;
-use CollectReviews\Ajax\AjaxManager;
-use CollectReviews\DatabaseMigrations\DatabaseMigrations;
-use CollectReviews\Integrations\Integrations;
-use CollectReviews\Platforms\Platforms;
-use CollectReviews\ReviewRequests\Queue;
-use CollectReviews\ReviewReplies\ReviewReplyPage;
+use CollectReviews\ServiceProviders\IntegrationsServiceProvider;
+use CollectReviews\ServiceProviders\MainServiceProvider;
+use CollectReviews\ServiceProviders\ServiceProviderInterface;
 use Exception;
 
 /**
@@ -22,6 +15,18 @@ use Exception;
  * @since 1.0.0
  */
 class Core {
+
+	/**
+	 * Service providers to register.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string[]
+	 */
+	private static $service_providers = [
+		MainServiceProvider::class,
+		IntegrationsServiceProvider::class
+	];
 
 	/**
 	 * URL to plugin directory.
@@ -51,6 +56,15 @@ class Core {
 	private $container;
 
 	/**
+	 * Registered service providers.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var ServiceProviderInterface[]
+	 */
+	private $registered_service_providers;
+
+	/**
 	 * Core constructor.
 	 *
 	 * @since 1.0.0
@@ -62,80 +76,43 @@ class Core {
 
 		$this->container = new Container();
 
-		// Load all the plugin.
-		$this->hooks();
-		$this->init_early();
-	}
-
-	/**
-	 * Register hooks.
-	 *
-	 * @since 1.0.0
-	 */
-	public function hooks() {
-
-		// Activation hook.
-		register_activation_hook( COLLECT_REVIEWS_PLUGIN_FILE, [ $this, 'activate' ] );
-
-		// Initialize plugin.
-		add_action( 'plugins_loaded', [ $this, 'init' ] );
-	}
-
-	/**
-	 * Plugin initialization.
-	 *
-	 * @since 1.0.0
-	 */
-	public function init() {
-
-		$this->boot();
-	}
-
-	/**
-	 * Functionality that should be initialized before `plugins_loaded` hook.
-	 *
-	 * @since 1.0.0
-	 */
-	private function init_early() {
-
-		// Define database tables.
-		$db_migrations = new DatabaseMigrations();
-		$db_migrations->define_tables();
-	}
-
-	/**
-	 * Register plugin modules.
-	 *
-	 * @since 1.0.0
-	 */
-	private function boot() {
-
-		$this->container->add( Request::class, 'request' );
-		$this->container->add( Options::class, 'options' );
-		$this->container->add( TemplateLoader::class, 'templates' );
-
-		$this->container->add_module( DatabaseMigrations::class, 'db-migrations' );
-
-		$this->container->add_module( AjaxManager::class, 'ajax' );
-
-		$this->container->add_module( Admin::class, 'admin' );
-		$this->container->add_module( Scripts::class, 'scripts' );
-		$this->container->add_module( ReviewRequestsAdminPage::class );
-		$this->container->add_module( SettingsPage::class );
-
-		$this->container->add_module( Queue::class );
-
-		$this->container->add_module( ReviewReplyPage::class );
-
-		$this->container->add_module( ReviewReplyPage::class );
-
-		foreach ( Integrations::INTEGRATIONS as $integration_slug => $integration_class ) {
-			$this->container->add_module( $integration_class, $integration_slug . '_integration' );
+		// Register service providers.
+		foreach ( self::$service_providers as $service_provider_class ) {
+			$this->register_service_provider( new $service_provider_class( $this->container ) );
 		}
 
-		$this->container->add( Integrations::class, 'integrations' );
+		// Bootstrap the plugin.
+		add_action( 'plugins_loaded', [ $this, 'bootstrap' ] );
 
-		$this->container->add( Platforms::class, 'platforms' );
+		// Register activation hook.
+		register_activation_hook( COLLECT_REVIEWS_PLUGIN_FILE, [ $this, 'activate' ] );
+	}
+
+	/**
+	 * Register a service provider.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param ServiceProviderInterface $service_provider Service provider.
+	 */
+	private function register_service_provider( $service_provider ) {
+
+		$service_provider->register();
+
+		$this->registered_service_providers[] = $service_provider;
+	}
+
+	/**
+	 * Bootstrap the plugin.
+	 *
+	 * @since 1.0.0
+	 */
+	public function bootstrap() {
+
+		// Bootstrap service providers.
+		foreach ( $this->registered_service_providers as $service_provider ) {
+			$service_provider->boot();
+		}
 	}
 
 	/**

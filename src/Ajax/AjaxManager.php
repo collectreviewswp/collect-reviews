@@ -2,14 +2,12 @@
 
 namespace CollectReviews\Ajax;
 
-use CollectReviews\ModuleInterface;
-
 /**
  * Class AjaxManager.
  *
  * @since 1.0.0
  */
-class AjaxManager implements ModuleInterface {
+class AjaxManager {
 
 	/**
 	 * The ajax action name.

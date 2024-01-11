@@ -3,14 +3,13 @@
 namespace CollectReviews\Admin;
 
 use CollectReviews\Integrations\EcommerceIntegrationInterface;
-use CollectReviews\ModuleInterface;
 
 /**
  * Class Scripts.
  *
  * @since 1.0.0
  */
-class Scripts implements ModuleInterface {
+class Scripts {
 
 	/**
 	 * Register hooks.

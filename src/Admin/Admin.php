@@ -2,14 +2,12 @@
 
 namespace CollectReviews\Admin;
 
-use CollectReviews\ModuleInterface;
-
 /**
  * Class Admin.
  *
  * @since 1.0.0
  */
-class Admin implements ModuleInterface {
+class Admin {
 
 	/**
 	 * Slug of the admin area page.

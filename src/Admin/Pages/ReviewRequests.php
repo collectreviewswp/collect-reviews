@@ -4,7 +4,6 @@ namespace CollectReviews\Admin\Pages;
 
 use CollectReviews\Ajax\Ajaxable;
 use CollectReviews\Helpers\Date;
-use CollectReviews\ModuleInterface;
 use CollectReviews\Platforms\Platform;
 use CollectReviews\ReviewRequests\ReviewRequest;
 use CollectReviews\ReviewRequests\ReviewRequestsQuery;
@@ -16,7 +15,7 @@ use WP_Error;
  *
  * @since 1.0.0
  */
-class ReviewRequests implements ModuleInterface {
+class ReviewRequests {
 
 	/**
 	 * Ajaxable trait.

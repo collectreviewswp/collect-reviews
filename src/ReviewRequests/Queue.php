@@ -3,7 +3,6 @@
 namespace CollectReviews\ReviewRequests;
 
 use CollectReviews\Helpers\Date;
-use CollectReviews\ModuleInterface;
 
 /**
  * Class Queue.
@@ -12,7 +11,7 @@ use CollectReviews\ModuleInterface;
  *
  * @since 1.0.0
  */
-class Queue implements ModuleInterface {
+class Queue {
 
 	/**
 	 * Constructor.
