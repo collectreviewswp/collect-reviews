@@ -32,13 +32,13 @@ In summary, the plugin sends review request emails, customers rate their experie
 
 ### Collect reviews manually
 
-You can always send review requests manually to any email addresses form the plugin interface.
+You can always send review requests manually to any email addresses from the plugin interface.
 
 ### Development
 
-Plugin source code is available on GitHub: https://github.com/collectreviewswp/collect-reviews
+Plugin source code is available on [GitHub](https://github.com/collectreviewswp/collect-reviews).
 
-Admin area is built with React. The source code is available on GitHub: https://github.com/collectreviewswp/collect-reviews/tree/main/react-app
+Admin area is built with React. The source code is available on [GitHub](https://github.com/collectreviewswp/collect-reviews/tree/main/react-app).
 
 Create React App is used as a build tool. To start development run `npm run start` in the `react-app` directory. The Webpack development server works in `writeToDisk` mode.
 
