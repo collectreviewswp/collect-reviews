@@ -24,7 +24,7 @@ if ( ! defined( 'COLLECT_REVIEWS_PHP_VER' ) ) {
 	define( 'COLLECT_REVIEWS_PHP_VER', '7.2' );
 }
 if ( ! defined( 'COLLECT_REVIEWS_WP_VER' ) ) {
-	define( 'COLLECT_REVIEWS_WP_VER', '5.2' );
+	define( 'COLLECT_REVIEWS_WP_VER', '5.3' );
 }
 if ( ! defined( 'COLLECT_REVIEWS_PLUGIN_FILE' ) ) {
 	define( 'COLLECT_REVIEWS_PLUGIN_FILE', __FILE__ );
