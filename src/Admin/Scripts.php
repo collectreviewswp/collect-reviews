@@ -50,6 +50,8 @@ class Scripts {
 			} else if ( $ext === 'js' ) {
 				wp_enqueue_script( 'react-js-' . $key, $path, [ 'wp-i18n' ], COLLECT_REVIEWS_PLUGIN_VER, true );
 
+				wp_set_script_translations( 'react-js-' . $key, 'collect-reviews' );
+
 				if ( empty( $script_handle ) ) {
 					$script_handle = 'react-js-' . $key;
 				}
