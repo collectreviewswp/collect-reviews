@@ -133,13 +133,37 @@ class ReviewRequestEmail implements EmailInterface {
 
 		ob_start();
 		?>
-		<p><?php printf( esc_html__( 'Dear %1$s %2$s', 'collect-reviews' ), '{{customer_first_name}}', '{{customer_last_name}}' ); ?>,</p>
-		<p><?php printf( esc_html__( 'We are grateful that you have chosen %s.', 'collect-reviews' ), '{{site_name}}' ); ?></p>
+		<p>
+			<?php
+			printf( /* translators: %1$s - customer first name; %2$s - customer last name.  */
+				esc_html__( 'Dear %1$s %2$s', 'collect-reviews' ),
+				'{{customer_first_name}}',
+				'{{customer_last_name}}' );
+			?>,
+		</p>
+		<p>
+			<?php
+			printf( /* translators: %s - site name. */
+				esc_html__( 'We are grateful that you have chosen %s.', 'collect-reviews' ),
+				'{{site_name}}'
+			);
+			?>
+		</p>
 		<p><?php esc_html_e( 'Please take a moment to share your experience. Your feedback is super important to us.', 'collect-reviews' ); ?></p>
 		<p><strong><?php esc_html_e( 'Click the stars to review us', 'collect-reviews' ); ?></strong></p>
 		<p>{{rating_stars}}</p>
 		<p><?php esc_html_e( 'It\'s only a minute for you, but a huge help for us.', 'collect-reviews' ); ?></p>
-		<p><?php echo wp_kses( sprintf( __( 'Thank you in advance,<br>%s team', 'collect-reviews' ), '{{site_name}}' ), [ 'br' => [] ] ); ?></p>
+		<p>
+			<?php
+			echo wp_kses(
+				sprintf( /* translators: %1$s - site name. */
+					__( 'Thank you in advance,<br>%1$s team', 'collect-reviews' ),
+					'{{site_name}}'
+				),
+				[ 'br' => [] ]
+			);
+			?>
+		</p>
 		<?php
 
 		return ob_get_clean();

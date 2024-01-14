@@ -89,14 +89,20 @@ class ReviewRequests {
 
 				if ( ! empty( $order_id ) ) {
 					$order_ref = [
-						'text' => sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), intval( $order_id ) ),
+						'text' => sprintf( /* translators: %1$s - order id. */
+							esc_html__( 'Order #%1$s', 'collect-reviews' ),
+							intval( $order_id )
+						),
 					];
 
 					if ( function_exists( 'WC' ) ) {
 						$order = wc_get_order( $order_id );
 
 						if ( ! empty( $order ) ) {
-							$order_ref['text'] = sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), esc_html( $order->get_order_number() ) );
+							$order_ref['text'] = sprintf( /* translators: %1$s - order id. */
+								esc_html__( 'Order #%1$s', 'collect-reviews' ),
+								esc_html( $order->get_order_number() )
+							);
 							$order_ref['url']  = admin_url( 'post.php?post=' . $order_id . '&action=edit' );
 						}
 					}
@@ -108,7 +114,10 @@ class ReviewRequests {
 
 				if ( ! empty( $payment_id ) ) {
 					$order_ref = [
-						'text' => sprintf( esc_html__( 'Order #%s', 'collect-reviews' ), intval( $payment_id ) ),
+						'text' => sprintf( /* translators: %1$s - order id. */
+							esc_html__( 'Order #%1$s', 'collect-reviews' ),
+							intval( $payment_id )
+						),
 					];
 
 					if ( function_exists( 'EDD' ) ) {
@@ -126,7 +135,10 @@ class ReviewRequests {
 
 				if ( ! empty( $form_id ) ) {
 					$form_ref = [
-						'text' => sprintf( esc_html__( 'Form #%s', 'collect-reviews' ), intval( $form_id ) ),
+						'text' => sprintf( /* translators: %1$s - form id. */
+							esc_html__( 'Form #%1$s', 'collect-reviews' ),
+							intval( $form_id )
+						),
 					];
 
 					if ( function_exists( 'wpforms' ) ) {
@@ -144,7 +156,10 @@ class ReviewRequests {
 
 				if ( ! empty( $entry_id ) ) {
 					$entry_ref = [
-						'text' => sprintf( esc_html__( 'Entry #%s', 'collect-reviews' ), intval( $entry_id ) ),
+						'text' => sprintf( /* translators: %1$s - entry id. */
+							esc_html__( 'Entry #%1$s', 'collect-reviews' ),
+							intval( $entry_id )
+						),
 						'url'  => esc_url( admin_url( 'admin.php?page=wpforms-entries&view=details&entry_id=' . intval( $entry_id ) ) ),
 					];
 
