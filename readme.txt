@@ -3,7 +3,7 @@ Contributors: collectreviewswp
 Tags: customer reviews, reviews collection, google reviews, facebook reviews, woocommerce, wpforms, easy digital downloads
 Requires at least: 5.3
 Tested up to: 6.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -79,3 +79,6 @@ You can set up integration with WPForms to send review request emails after the 
 
 = 1.0.0 =
 * Initial release.
+
+= 1.0.1 =
+* Added: Prepared for localization.
