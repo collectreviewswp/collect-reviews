@@ -76,8 +76,8 @@ class Admin {
 
 		add_submenu_page(
 			self::SLUG,
-			esc_html__( 'Requests', 'collect-reviews' ),
-			esc_html__( 'Requests', 'collect-reviews' ),
+			esc_html__( 'Review Requests', 'collect-reviews' ),
+			esc_html__( 'Review Requests', 'collect-reviews' ),
 			$access_capability,
 			self::SLUG,
 			[ $this, 'display' ]
