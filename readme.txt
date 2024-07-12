@@ -1,6 +1,6 @@
 === Collect Reviews ===
 Contributors: collectreviewswp
-Tags: customer reviews, reviews collection, google reviews, facebook reviews, woocommerce, wpforms, easy digital downloads
+Tags: customer reviews, reviews collection, google reviews, woocommerce, wpforms
 Requires at least: 5.3
 Tested up to: 6.5
 Stable tag: 1.0.2
