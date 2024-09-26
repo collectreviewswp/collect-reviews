@@ -61,9 +61,11 @@ class Preview {
 		$review_request->set_created_date( Date::create( 'now' ) );
 		$review_request->set_integration( 'woocommerce' );
 
+		$rating_stars_style = $this->args['rating_stars_style'] ?? false;
+
 		$smart_tags = new Processor( [
 			'{{site_name}}'    => new SiteName(),
-			'{{rating_stars}}' => new RatingStars( $review_request ),
+			'{{rating_stars}}' => new RatingStars( $review_request, $rating_stars_style ),
 			'{{action}}'       => new Action( $review_request ),
 		] );
 

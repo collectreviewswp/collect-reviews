@@ -22,15 +22,31 @@ class RatingStars implements SmartTagInterface {
 	private $review_request;
 
 	/**
+   * Rating stars style.
+   *
+	 * @since 1.1.0
+	 *
+	 * @var string
+	 */
+  private $rating_stars_style;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param ReviewRequest $review_request Review request.
+	 * @param ReviewRequest $review_request     Review request.
+	 * @param string|false  $rating_stars_style Rating stars style.
 	 */
-	public function __construct( $review_request ) {
+	public function __construct( $review_request, $rating_stars_style = false ) {
 
 		$this->review_request = $review_request;
+
+		if ( $rating_stars_style === false ) {
+			$this->rating_stars_style = collect_reviews()->get( 'options' )->get( 'review_request_email.rating_stars_style', 'gradient' );
+		} else {
+			$this->rating_stars_style = $rating_stars_style;
+		}
 	}
 
 	/**
@@ -42,13 +58,23 @@ class RatingStars implements SmartTagInterface {
 	 */
 	public function get_value() {
 
-		$rating_colors = [
-			5 => '#57e32c',
-			4 => '#b7dd29',
-			3 => '#ffe234',
-			2 => '#ffa534',
-			1 => '#ff4545',
-		];
+		if ( $this->rating_stars_style === 'classic' ) {
+			$rating_colors = [
+				5 => '#FFD700',
+				4 => '#FFD700',
+				3 => '#FFD700',
+				2 => '#FFD700',
+				1 => '#FFD700',
+			];
+		} else {
+			$rating_colors = [
+				5 => '#57e32c',
+				4 => '#b7dd29',
+				3 => '#ffe234',
+				2 => '#ffa534',
+				1 => '#ff4545',
+			];
+		}
 
 		$base_url = add_query_arg(
 			[
@@ -67,7 +93,13 @@ class RatingStars implements SmartTagInterface {
 				<td>
 					<?php for ( $i = 0; $i < 5; $i ++ ) :
 						$rating = 5 - $i;
-						$star_height = 25 - $i * 2;
+
+						if ( $this->rating_stars_style === 'classic' ) {
+							$star_height = 25;
+						} else {
+							$star_height = 25 - $i * 2;
+						}
+
 						$url = add_query_arg( 'rating', $rating, $base_url );
 						?>
 						<table align="center" width="100%" style="margin-bottom:10px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif" border="0" cellPadding="0" cellSpacing="0" role="presentation">

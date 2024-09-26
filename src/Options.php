@@ -169,6 +169,7 @@ class Options {
 			case 'integrations.wpforms.enabled':
 				$value = filter_var( $value, FILTER_VALIDATE_BOOLEAN );
 				break;
+			case 'review_request_email.rating_stars_style':
 			case 'integrations.woocommerce.triggers.order_status':
 			case 'integrations.woocommerce.triggers.platforms.type':
 			case 'integrations.easy_digital_downloads.triggers.order_status':
@@ -233,15 +234,16 @@ class Options {
 				'frequency' => - 1
 			],
 			'review_request_email' => [
-				'from_name'   => $blog_name,
-				'from_email'  => $admin_email,
-				'subject'     => sprintf( /* translators: %s blog name. */
+				'from_name'          => $blog_name,
+				'from_email'         => $admin_email,
+				'subject'            => sprintf( /* translators: %s blog name. */
 					esc_html__( 'Tell us about your experience with %s', 'collect-reviews' ),
 					'{{site_name}}'
 				),
-				'logo'        => false,
-				'content'     => ReviewRequestEmail::get_default_content(),
-				'footer_text' => sprintf( /* translators: %1$s customer action; %2$s blog name. */
+				'logo'               => false,
+				'rating_stars_style' => 'gradient',
+				'content'            => ReviewRequestEmail::get_default_content(),
+				'footer_text'        => sprintf( /* translators: %1$s customer action; %2$s blog name. */
 					esc_html__( 'You received this email because you %1$s on %2$s website.', 'collect-reviews' ),
 					'{{action}}',
 					'{{site_name}}'

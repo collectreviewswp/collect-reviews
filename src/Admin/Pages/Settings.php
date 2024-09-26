@@ -138,14 +138,16 @@ class Settings {
 			];
 		}
 
-		$content     = isset( $data['content'] ) ? wp_kses_post( $data['content'] ) : '';
-		$footer_text = isset( $data['footer_text'] ) ? wp_kses_post( $data['footer_text'] ) : '';
+		$content            = isset( $data['content'] ) ? wp_kses_post( $data['content'] ) : '';
+		$rating_stars_style = isset( $data['rating_stars_style'] ) ? sanitize_key( $data['rating_stars_style'] ) : false;
+		$footer_text        = isset( $data['footer_text'] ) ? wp_kses_post( $data['footer_text'] ) : '';
 
 		$preview = new ReviewRequestsEmailPreview(
 			$content,
 			[
-				'logo'        => $logo,
-				'footer_text' => $footer_text,
+				'logo'               => $logo,
+				'rating_stars_style' => $rating_stars_style,
+				'footer_text'        => $footer_text,
 			]
 		);
 

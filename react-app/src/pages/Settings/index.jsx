@@ -52,6 +52,7 @@ export default function Settings() {
 			from_email: '',
 			subject: '',
 			logo: false,
+			rating_stars_style: 'gradient',
 			content: '',
 			footer_text: '',
 			...data.options?.review_request_email || {},
@@ -183,7 +184,7 @@ export default function Settings() {
 			</PageHeader>
 
 			<Formik {...formSettings} innerRef={formRef}>
-				{( {values, isSubmitting, setFieldValue} ) => (
+				{( {values, isSubmitting, setFieldValue, handleChange} ) => (
 					<Form>
 						<MetaBox title={__( 'Integrations', 'collect-reviews' )}>
 							<Row>
@@ -445,6 +446,27 @@ export default function Settings() {
 											}}
 										/>
 									</>
+								}
+							/>
+
+							<SettingRow
+								label={__( 'Rating Stars Style', 'collect-reviews' )}
+								labelFor="rating-stars-style"
+								field={
+									<Select
+										name="review_request_email.rating_stars_style"
+										id="rating-stars-style"
+										onChange={( event ) => {
+											handleChange( event );
+											updateEmailPreview( {
+												...values.review_request_email,
+												rating_stars_style: event.target.value,
+											} );
+										}}
+									>
+										<MenuItem value="gradient">{__( 'Gradient (default)', 'collect-reviews' )}</MenuItem>
+										<MenuItem value="classic">{__( 'Classic', 'collect-reviews' )}</MenuItem>
+									</Select>
 								}
 							/>
 
