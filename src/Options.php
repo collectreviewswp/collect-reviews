@@ -164,6 +164,7 @@ class Options {
 			case 'review_request_email.footer_text':
 				$value = wp_kses_post( $value );
 				break;
+			case 'positive_review.skip_confirmation':
 			case 'integrations.woocommerce.enabled':
 			case 'integrations.easy_digital_downloads.enabled':
 			case 'integrations.wpforms.enabled':
@@ -248,6 +249,9 @@ class Options {
 					'{{action}}',
 					'{{site_name}}'
 				)
+			],
+			'positive_review'      => [
+				'skip_confirmation' => false
 			],
 			'negative_review'      => [
 				'email'     => $admin_email,

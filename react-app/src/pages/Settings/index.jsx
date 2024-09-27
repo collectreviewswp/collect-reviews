@@ -38,6 +38,7 @@ import useNotices from "store/notices";
 import data from "helpers/data";
 import api from "helpers/api";
 import yup from 'helpers/validation';
+import Switch from "../../components/fields/Switch";
 
 const Editor = lazy( () => import('components/TinyMceEditor') );
 
@@ -60,6 +61,10 @@ export default function Settings() {
 		review_request: {
 			frequency: -1,
 			...data.options?.review_request || {},
+		},
+		positive_review: {
+			skip_confirmation: false,
+			...data.options?.positive_review || {},
 		},
 		negative_review: {
 			email: '',
@@ -544,6 +549,20 @@ export default function Settings() {
 									</TabPanel>
 								</TabContext>
 							</Row>
+						</MetaBox>
+
+						<MetaBox title={__( 'Positive Reviews', 'collect-reviews' )}>
+							<SettingRow
+								label={__( 'Skip confirmation page', 'collect-reviews' )}
+								labelFor="positive-review-skip-confirmation"
+								description={__( 'Enable this option to skip the confirmation page and automatically redirect customers to the review platform immediately after they click a rating in the review request email.', 'collect-reviews' )}
+								field={
+									<Switch
+										name="positive_review.skip_confirmation"
+										id="positive-review-skip-confirmation"
+									/>
+								}
+							/>
 						</MetaBox>
 
 						<MetaBox title={__( 'Negative Reviews', 'collect-reviews' )}>

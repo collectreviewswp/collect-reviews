@@ -133,7 +133,19 @@ class ReviewReplyPage {
 		$options                   = collect_reviews()->get( 'options' );
 		$negative_review_threshold = $options->get( 'negative_review.threshold', 3 );
 
-		if ( $rating > $negative_review_threshold ) {
+		$is_positive_rating = $rating > $negative_review_threshold;
+
+		if (
+			$is_positive_rating &&
+			$options->get( 'positive_review.skip_confirmation', false )
+		) {
+			$review_request->set_positive_review_link_clicked( true );
+			$review_request->save();
+			wp_redirect( $review_request->get_positive_review_url() );
+			exit();
+		}
+
+		if ( $is_positive_rating ) {
 			$template = 'review-replies/positive-review';
 		} else {
 			$template = 'review-replies/negative-review';
