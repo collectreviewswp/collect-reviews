@@ -91,3 +91,6 @@ You can set up integration with WPForms to send review request emails after the 
 * Added: Classic rating stars style.
 * Added: Ability to skip positive review confirmation page.
 * Added: Compatibility with WordPress 6.6.
+
+= 1.1.1 =
+* Fixed: Skip positive review confirmation page toggle state after settings save.

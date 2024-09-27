@@ -93,6 +93,7 @@ export default function Settings() {
 				setValues( {
 					review_request_email: updatedValues.review_request_email || {},
 					review_request: updatedValues.review_request || {},
+					positive_review: updatedValues.positive_review || {},
 					negative_review: updatedValues.negative_review || {},
 				} );
 
