@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Collect Reviews
- * Version: 1.1.0
+ * Version: 1.1.1
  * Requires at least: 5.3
  * Requires PHP: 7.2
  * Description: The ultimate WordPress plugin for automatically collecting reviews on any platform like Google or Facebook.
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'COLLECT_REVIEWS_PLUGIN_VER' ) ) {
-	define( 'COLLECT_REVIEWS_PLUGIN_VER', '1.1.0' );
+	define( 'COLLECT_REVIEWS_PLUGIN_VER', '1.1.1' );
 }
 if ( ! defined( 'COLLECT_REVIEWS_PHP_VER' ) ) {
 	define( 'COLLECT_REVIEWS_PHP_VER', '7.2' );
