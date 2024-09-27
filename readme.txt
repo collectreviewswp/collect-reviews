@@ -86,3 +86,8 @@ You can set up integration with WPForms to send review request emails after the 
 = 1.0.2 =
 * Added: Compatibility with WordPress 6.5.
 * Changed: Review Requests page menu item title.
+
+= 1.1.0 =
+* Added: Classic rating stars style.
+* Added: Ability to skip positive review confirmation page.
+* Added: Compatibility with WordPress 6.6.
