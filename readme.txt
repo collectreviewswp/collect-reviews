@@ -3,7 +3,7 @@ Contributors: collectreviewswp
 Tags: customer reviews, reviews collection, google reviews, woocommerce, wpforms
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
