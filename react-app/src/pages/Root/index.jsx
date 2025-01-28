@@ -11,34 +11,33 @@ import Notice from "components/Notice";
 
 import useNotices from "store/notices";
 import ConfirmationModal from "../../components/ConfirmationModal";
-import {useStore} from "../../store";
 import {useConfirmationModal} from "../../helpers/modals";
 
-export default function Root() {
+export default function Root({containerWidth = "lg"}) {
 
 	const location = useLocation(),
 		notices = useNotices(),
 		confirmationModal = useConfirmationModal();
 
 	// Clear notices on location change.
-	React.useEffect( () => notices.clear(), [ location ] );
+	React.useEffect(() => notices.clear(), [location]);
 
 	return (
 		<>
 			<AppBar position="static" sx={{marginBottom: 4}}>
-				<Container>
+				<Container maxWidth={containerWidth}>
 					<Toolbar disableGutters>
 						<Logo style={{maxWidth: 170}}/>
 					</Toolbar>
 				</Container>
 			</AppBar>
 
-			<Container>
-				{notices.list.map( notice =>
+			<Container maxWidth={containerWidth}>
+				{notices.list.map(notice =>
 					<Notice
 						key={notice.id}
 						severity={notice.type}
-						onClose={() => notices.remove( notice.id )}
+						onClose={() => notices.remove(notice.id)}
 						sx={{mb: 3}}
 					>
 						{notice.text}

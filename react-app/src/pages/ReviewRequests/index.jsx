@@ -48,7 +48,16 @@ const columns = [
 			}
 
 			return (
-				<Tooltip title={tooltip}>
+				<Tooltip
+					title={tooltip}
+					slotProps={{
+						popper: {
+							sx: {
+								zIndex: 9991, // Use higher z-index than WP dashboard menu.
+							},
+						},
+					}}
+				>
 					<Box
 						sx={{
 							'svg': {
@@ -65,11 +74,11 @@ const columns = [
 		},
 		sortable: false
 	},
-	{field: 'email', headerName: __( 'Email', 'collect-reviews' ), width: 207, sortable: false},
-	{field: 'platform_name', headerName: __( 'Platform', 'collect-reviews' ), width: 120, sortable: false},
-	{field: 'created_date', headerName: __( 'Created date', 'collect-reviews' ), width: 175, sortable: false},
-	{field: 'send_date', headerName: __( 'Send date', 'collect-reviews' ), width: 175, sortable: false},
-	{field: 'rate_date', headerName: __( 'Rate date', 'collect-reviews' ), width: 175, sortable: false},
+	{field: 'email', headerName: __( 'Email', 'collect-reviews' ), minWidth: 207, sortable: false, flex: 2},
+	{field: 'platform_name', headerName: __( 'Platform', 'collect-reviews' ), minWidth: 120, sortable: false, flex: 1},
+	{field: 'created_date', headerName: __( 'Created date', 'collect-reviews' ), minWidth: 220, sortable: false, flex: 1},
+	{field: 'send_date', headerName: __( 'Send date', 'collect-reviews' ), minWidth: 220, sortable: false, flex: 1},
+	{field: 'rate_date', headerName: __( 'Rate date', 'collect-reviews' ), minWidth: 220, sortable: false, flex: 1},
 	{
 		field: 'rating',
 		headerName: __( 'Rating', 'collect-reviews' ),

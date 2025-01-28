@@ -7,14 +7,20 @@ import NewReviewRequest from "./New";
 export default [
 	{
 		path: "/",
-		element: <Root/>,
+		element: <Root containerWidth={false}/>,
 		children: [
 			{
 				index: true,
 				element: <ReviewRequests/>,
 			},
+		],
+	},
+	{
+		path: "/new",
+		element: <Root/>,
+		children: [
 			{
-				path: "/new",
+				index: true,
 				element: <NewReviewRequest/>,
 			},
 		],
