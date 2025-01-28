@@ -2,7 +2,7 @@
 Contributors: collectreviewswp
 Tags: customer reviews, reviews collection, google reviews, woocommerce, wpforms
 Requires at least: 5.3
-Tested up to: 6.6
+Tested up to: 6.7
 Stable tag: 1.1.1
 Requires PHP: 7.2
 License: GPLv3
@@ -96,4 +96,5 @@ You can set up integration with WPForms to send review request emails after the 
 * Fixed: Skip positive review confirmation page toggle state after settings save.
 
 = 1.1.2 =
+* Added: Compatibility with WordPress 6.7.
 * Changed: Review Requests page layout to full width.
