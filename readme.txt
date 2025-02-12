@@ -77,6 +77,9 @@ You can set up integration with WPForms to send review request emails after the 
 
 == Changelog ==
 
+= 1.1.3 =
+* Fixed: Negative review form not appearing due to a compatibility issue with Elementor header and footer templates.
+
 = 1.1.2 =
 * Added: Compatibility with WordPress 6.7.
 * Changed: Review Requests page layout to full width.

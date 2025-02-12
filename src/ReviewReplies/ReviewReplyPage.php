@@ -159,7 +159,7 @@ class ReviewReplyPage {
 
 		add_filter( 'template_include', function () use ( $template ) {
 			return collect_reviews()->get( 'templates' )->get_template_path( $template );
-		} );
+		}, PHP_INT_MAX );
 	}
 
 	/**
