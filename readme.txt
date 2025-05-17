@@ -2,7 +2,7 @@
 Contributors: collectreviewswp
 Tags: customer reviews, reviews collection, google reviews, woocommerce, wpforms
 Requires at least: 5.3
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 1.1.3
 Requires PHP: 7.2
 License: GPLv3
@@ -76,6 +76,9 @@ You can set up integration with WPForms to send review request emails after the 
 4. Review Request Email
 
 == Changelog ==
+
+= 1.1.4 =
+* Added: Compatibility with WordPress 6.8.
 
 = 1.1.3 =
 * Fixed: Negative review form not appearing due to a compatibility issue with Elementor header and footer templates.
